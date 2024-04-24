@@ -10,7 +10,7 @@ CREATE TABLE pengguna (
 
 CREATE TABLE paket (
     nama varchar(50),
-    password int NOT NULL CHECK (harga >= 0),
+    harga int NOT NULL CHECK (harga >= 0),
     resolusi_layar varchar(50) NOT NULL
 );
 
