@@ -1,5 +1,6 @@
 CREATE SCHEMA PACILFLIX;
 
+SET DATESTYLE TO ISO;
 SET search_path to PACILFLIX;
 
 CREATE TABLE pengguna (
@@ -444,7 +445,7 @@ INSERT INTO tayangan VALUES ('164c4142-3163-4e85-8b36-36b2b2e9c31c','The Hidden 
 	('60b9e2aa-1467-44db-b5de-451d654355e0','Phantom Shadows','Shadows lurk in the darkness, hiding secrets untold.','Japan','Face your deepest fears in this chilling horror.','https://example.com/trailer14.mp4','2025-07-15 00:00:00','5d9bbd4b-9380-4b0d-8758-48b0a47d9a38'),
 	('67b9a84e-75e1-462e-93c3-3ff11095b899','Echoes of the Past','Echoes of the past reverberate through time and space.','Italy','Relive the echoes of history in this epic adventure.','https://example.com/trailer15.mp4','2025-08-20 00:00:00','8fb9e670-ef6d-47b1-92ac-6d344f0f8fd1');
 
-INSERT INTO "memainkan_tayangan" VALUES ('164c4142-3163-4e85-8b36-36b2b2e9c31c','8fde8371-c9e7-4d25-8194-4da791b7d51d'),
+INSERT INTO memainkan_tayangan VALUES ('164c4142-3163-4e85-8b36-36b2b2e9c31c','8fde8371-c9e7-4d25-8194-4da791b7d51d'),
 	('64a9a4bb-1f78-43c6-8d7b-df188b2b396f','e2e0e1a5-45cc-4a28-97b0-2cf3b6cd7445'),
 	('52ab837e-ff35-4932-80b0-d00198ba2543','4e31539a-5a1d-4484-a2d6-f5fb1ec4a59a'),
 	('7f011a9f-1d3f-4ef9-8a8e-72d1e443d194','5f91b631-0c0a-49f8-8cf1-447174ed0cb4'),
