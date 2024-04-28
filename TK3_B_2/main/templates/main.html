@@ -1,8 +1,365 @@
 
 <h1>PACILFLIX-B-2 Page</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skema Tabel PACILFLIX</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #4285f4;
+            color: white;
+        }
+        td {
+            background-color: white;
+            color: black;
+        }
+        h2 {
+            color: #333;
+        }
+        h3 {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Skema Tabel PACILFLIX</h2>
+
+<h3>Tabel pengguna</h3>
+<table>
+    <tr>
+        <th>username</th>
+        <th>password</th>
+        <th>id_tayangan</th>
+    </tr>
+    <tr>
+        <td>varchar(50)</td>
+        <td>varchar(50) NOT NULL</td>
+        <td>UUID</td>
+    </tr>
+</table>
+
+<h3>Tabel paket</h3>
+<table>
+    <tr>
+        <th>nama</th>
+        <th>harga</th>
+        <th>resolusi_layar</th>
+    </tr>
+    <tr>
+        <td>varchar(50)</td>
+        <td>int NOT NULL CHECK (harga &gt;= 0)</td>
+        <td>varchar(50) NOT NULL</td>
+    </tr>
+</table>
+
+<h3>Tabel dukungan_perangkat</h3>
+<table>
+    <tr>
+        <th>nama_paket</th>
+        <th>dukungan_perangkat</th>
+    </tr>
+    <tr>
+        <td>varchar(50)</td>
+        <td>varchar(50)</td>
+    </tr>
+</table>
+
+<h3>Tabel transaction</h3>
+<table>
+    <tr>
+        <th>username</th>
+        <th>start_date_time</th>
+        <th>end_date_time</th>
+        <th>nama_paket</th>
+        <th>metode_pembayaran</th>
+        <th>timestamp_pembayaran</th>
+    </tr>
+    <tr>
+        <td>varchar(50)</td>
+        <td>date</td>
+        <td>date</td>
+        <td>varchar(50)</td>
+        <td>varchar(50) NOT NULL</td>
+        <td>timestamp NOT NULL</td>
+    </tr>
+</table>
+
+<h3>Tabel contributors</h3>
+<table>
+    <tr>
+        <th>id</th>
+        <th>nama</th>
+        <th>jenis_kelamin</th>
+        <th>kewarganegaraan</th>
+    </tr>
+    <tr>
+        <td>UUID</td>
+        <td>varchar(50) NOT NULL</td>
+        <td>int NOT NULL</td>
+        <td>varchar(50) NOT NULL</td>
+    </tr>
+</table>
+
+<h3>Tabel penulis_skenario</h3>
+<table>
+    <tr>
+        <th>id</th>
+    </tr>
+    <tr>
+        <td>UUID</td>
+    </tr>
+</table>
+
+<h3>Tabel pemain</h3>
+<table>
+    <tr>
+        <th>id</th>
+    </tr>
+    <tr>
+        <td>UUID</td>
+    </tr>
+</table>
+
+<h3>Tabel sutradara</h3>
+<table>
+    <tr>
+        <th>id</th>
+    </tr>
+    <tr>
+        <td>UUID</td>
+    </tr>
+</table>
+
+<h3>Tabel tayangan</h3>
+<table>
+    <tr>
+        <th>id</th>
+        <th>judul</th>
+        <th>sinopsis</th>
+        <th>asal_negara</th>
+        <th>sinopsis_trailer</th>
+        <th>url_video_trailer</th>
+        <th>release_date_trailer</th>
+        <th>id_sutradara</th>
+    </tr>
+    <tr>
+        <td>UUID</td>
+        <td>varchar(100) NOT NULL</td>
+        <td>varchar(255) NOT NULL</td>
+        <td>varchar(50) NOT NULL</td>
+        <td>varchar(255) NOT NULL</td>
+        <td>varchar(255) NOT NULL</td>
+        <td>date NOT NULL</td>
+        <td>UUID</td>
+    </tr>
+</table>
+
+<h3>Tabel memainkan_tayangan</h3>
+<table>
+    <tr>
+        <th>id_tayangan</th>
+        <th>id_pemain</th>
+    </tr>
+    <tr>
+        <td>UUID</td>
+        <td>UUID</td>
+    </tr>
+</table>
+
+<h3>Tabel menulis_skenario_tayangan</h3>
+<table>
+    <tr>
+        <th>id_tayangan</th>
+        <th>id_penulis_skenario</th>
+    </tr>
+    <tr>
+        <td>UUID</td>
+        <td>UUID</td>
+    </tr>
+</table>
+
+<h3>Tabel genre_tayangan</h3>
+<table>
+    <tr>
+        <th>id_tayangan</th>
+        <th>genre</th>
+    </tr>
+    <tr>
+        <td>UUID</td>
+        <td>varchar(50)</td>
+    </tr>
+</table>
+
+<h3>Tabel perusahaan_produksi</h3>
+<table>
+    <tr>
+        <th>nama</th>
+    </tr>
+    <tr>
+        <td>varchar(100)</td>
+    </tr>
+</table>
+
+<h3>Tabel persetujuan</h3>
+<table>
+    <tr>
+        <th>nama</th>
+        <th>id_tayangan</th>
+        <th>tanggal_persetujuan</th>
+        <th>durasi</th>
+        <th>biaya</th>
+        <th>tanggal_mulai_penayangan</th>
+    </tr>
+    <tr>
+        <td>varchar(100)</td>
+        <td>UUID</td>
+        <td>date</td>
+        <td>int NOT NULL CHECK (durasi &gt;= 0)</td>
+        <td>int NOT NULL CHECK (biaya &gt;= 0)</td>
+        <td>date NOT NULL</td>
+    </tr>
+</table>
+
+<h3>Tabel series</h3>
+<table>
+    <tr>
+        <th>id_tayangan</th>
+    </tr>
+    <tr>
+        <td>UUID</td>
+    </tr>
+</table>
+
+<h3>Tabel film</h3>
+<table>
+    <tr>
+        <th>id_tayangan</th>
+        <th>url_video_film</th>
+        <th>release_date_film</th>
+        <th>durasi_film</th>
+    </tr>
+    <tr>
+        <td>UUID</td>
+        <td>varchar(255) NOT NULL</td>
+        <td>date NOT NULL</td>
+        <td>int NOT NULL DEFAULT 0</td>
+    </tr>
+</table>
+
+<h3>Tabel episode</h3>
+<table>
+    <tr>
+        <th>id_series</th>
+        <th>sub_judul</th>
+        <th>sinopsis</th>
+        <th>durasi</th>
+        <th>url_video</th>
+        <th>release_date</th>
+    </tr>
+    <tr>
+        <td>UUID</td>
+        <td>varchar(100)</td>
+        <td>varchar(255) NOT NULL</td>
+        <td>int NOT NULL</td>
+        <td>varchar(255) NOT NULL</td>
+        <td>date NOT NULL</td>
+    </tr>
+</table>
+
+<h3>Tabel ulasan</h3>
+<table>
+    <tr>
+        <th>id_tayangan</th>
+        <th>username</th>
+        <th>timestamp</th>
+        <th>rating</th>
+        <th>deskripsi</th>
+    </tr>
+    <tr>
+        <td>UUID</td>
+        <td>varchar(50)</td>
+        <td>timestamp</td>
+        <td>int NOT NULL DEFAULT 0</td>
+        <td>varchar(255)</td>
+    </tr>
+</table>
+
+<h3>Tabel tayangan_memiliki_daftar_favorit</h3>
+<table>
+    <tr>
+        <th>id_tayangan</th>
+        <th>timestamp</th>
+        <th>username</th>
+    </tr>
+    <tr>
+        <td>UUID</td>
+        <td>timestamp</td>
+        <td>varchar(50)</td>
+    </tr>
+</table>
+
+<h3>Tabel daftar_favorit</h3>
+<table>
+    <tr>
+        <th>timestamp</th>
+        <th>username</th>
+        <th>judul</th>
+    </tr>
+    <tr>
+        <td>timestamp</td>
+        <td>varchar(50)</td>
+        <td>varchar(50) NOT NULL</td>
+    </tr>
+</table>
+
+<h3>Tabel riwayat_nonton</h3>
+<table>
+    <tr>
+        <th>id_tayangan</th>
+        <th>username</th>
+        <th>start_date_time</th>
+        <th>end_date_time</th>
+    </tr>
+    <tr>
+        <td>UUID</td>
+        <td>varchar(50)</td>
+        <td>timestamp</td>
+        <td>timestamp NOT NULL</td>
+    </tr>
+</table>
+
+<h3>Tabel tayangan_terunduh</h3>
+<table>
+    <tr>
+        <th>id_tayangan</th>
+        <th>username</th>
+        <th>timestamp</th>
+    </tr>
+    <tr>
+        <td>UUID</td>
+        <td>varchar(50)</td>
+        <td>timestamp</td>
+    </tr>
+</table>
+
+</body>
+</html>
 
 
-<h5>Name: </h5>
-<p>{{ name }}<p>
-<h5>Class: </h5>
-<p>{{ class }}<p>
+
