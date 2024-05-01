@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Halaman Series - PacilFlix</title>
+  <title>Halaman Episode - PacilFlix</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <!-- Font Awesome -->
@@ -20,74 +20,47 @@
       margin-right: 10px; /* Spasi kanan */
     }
 
-    /* Gaya tombol unduh */
-    .btn-unduh {
-      background-color: #000000; /* Hitam */
-      border-color: #000000; /* Hitam */
-      color: #ffffff;
-    }
-
-    /* Gaya tombol favoritkan */
-    .btn-favoritkan {
-      background-color: #ffffff; /* Putih */
-      border-color: #ffffff; /* Putih */
-      color: #000000; /* Teks Hitam */
-    }
-
     /* Gaya tambahan untuk judul */
     .judul {
       margin-top: 30px; /* Spasi atas */
       margin-bottom: 20px; /* Spasi bawah */
       font-weight: bold; /* Teks tebal */
+      font-size: 36px; /* Ukuran teks besar */
     }
 
-    /* Gaya tambahan untuk informasi series */
-    .series-info {
+    /* Gaya tambahan untuk informasi episode */
+    .episode-info {
       margin-bottom: 20px; /* Spasi bawah */
       font-weight: bold; /* Teks tebal */
+      font-size: 24px; /* Ukuran teks besar */
     }
 
     /* Gaya tambahan untuk bagian ulasan */
     .ulasan {
       margin-top: 30px; /* Spasi atas */
+      font-size: 24px; /* Ukuran teks besar */
     }
   </style>
 </head>
 <body>
 
 <div class="container mt-4">
-  <h1 class="mb-4 judul">Halaman Series</h1>
+  <h1 class="mb-4 judul">Halaman Episode</h1>
 
-  <!-- Informasi Series -->
-  <div class="series-info">
-    <h2>Judul: <span id="judul-series">-------</span></h2>
-    <p>Episode:</p>
+  <!-- Informasi Episode -->
+  <div class="episode-info">
+    <h2>Judul: <span id="judul-episode">-------</span></h2>
+    <h3>Sub Judul: <span id="sub-judul">-------</span></h3>
+    <button class="btn btn-tonton">Tonton</button>
+    <p>Episode Lainnya:</p>
     <ul>
       <li><a href="#" id="link-episode-1">Episode 1</a></li>
       <!-- Lanjutkan dengan link episode lainnya jika diperlukan -->
     </ul>
-    <button class="btn btn-unduh">Unduh</button>
-    <button class="btn btn-favoritkan">Favoritkan</button>
-    <p>Total View: <span id="total-view">-------</span></p>
-    <p>Rating Rata-Rata: <span id="rating">-------</span></p>
-    <p>Sinopsis: <span id="sinopsis">-------</span></p>
-    <p>Genre:</p>
-    <ul>
-      <li><span id="genre-1">-------</span></li>
-      <!-- Lanjutkan dengan item genre lainnya jika diperlukan -->
-    </ul>
-    <p>Asal Negara: <span id="asal-negara">-------</span></p>
-    <p>Pemain:</p>
-    <ul>
-      <li><span id="pemain-1">-------</span></li>
-      <!-- Lanjutkan dengan item pemain lainnya jika diperlukan -->
-    </ul>
-    <p>Penulis Skenario:</p>
-    <ul>
-      <li><span id="penulis-skenario-1">-------</span></li>
-      <!-- Lanjutkan dengan item penulis skenario lainnya jika diperlukan -->
-    </ul>
-    <p>Sutradara: <span id="sutradara">-------</span></p>
+    <p>Sinopsis Episode: <span id="sinopsis-episode">-------</span></p>
+    <p>Durasi Episode: <span id="durasi-episode">-------</span></p>
+    <p>URL Episode: <a href="#" id="url-episode">www.example.com</a></p>
+    <p>Tanggal Rilis Episode: <span id="tanggal-rilis-episode">-------</span></p>
   </div>
 
   <!-- Bagian Ulasan -->
