@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halaman Series - PacilFlix</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      background-image: url('https://i.pinimg.com/564x/c1/56/3c/c1563cc3942d5081b510179102629916.jpg'); /* URL gambar transparan */
+      background-size: cover; /* Penyesuaian ukuran gambar */
+      color: #ffffff; /* Warna Teks Putih */
+    }
+
+    .btn {
+      border-radius: 10px; /* Aksen lengkungan pada tombol */
+      margin-right: 10px; /* Spasi kanan */
+    }
+
+    /* Gaya tombol unduh */
+    .btn-unduh {
+      background-color: #000000; /* Hitam */
+      border-color: #000000; /* Hitam */
+    }
+
+    /* Gaya tombol favoritkan */
+    .btn-favoritkan {
+      background-color: #ffffff; /* Putih */
+      border-color: #ffffff; /* Putih */
+      color: #000000; /* Teks Hitam */
+    }
+
+    /* Gaya tambahan untuk judul */
+    .judul {
+      margin-top: 30px; /* Spasi atas */
+      margin-bottom: 20px; /* Spasi bawah */
+    }
+
+    /* Gaya tambahan untuk informasi series */
+    .series-info {
+      margin-bottom: 20px; /* Spasi bawah */
+    }
+
+    /* Gaya tambahan untuk bagian ulasan */
+    .ulasan {
+      margin-top: 30px; /* Spasi atas */
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-4">
+  <h1 class="mb-4 judul">Halaman Series</h1>
+
+  <!-- Informasi Series -->
+  <div class="series-info">
+    <h2>Judul: <span id="judul-series">Nama Series</span></h2>
+    <p>Episode:</p>
+    <ul>
+      <li><a href="#" id="link-episode-1">Episode 1</a></li>
+      <!-- Lanjutkan dengan link episode lainnya jika diperlukan -->
+    </ul>
+    <button class="btn btn-unduh">Unduh Tayangan</button>
+    <button class="btn btn-favoritkan">Favoritkan Tayangan</button>
+    <p>Total View: <span id="total-view">1000</span></p>
+    <p>Rating Rata-Rata: <span id="rating">4.5</span></p>
+    <p>Sinopsis: <span id="sinopsis">Sinopsis Series</span></p>
+    <p>Genre:</p>
+    <ul>
+      <li><span id="genre-1">Genre 1</span></li>
+      <!-- Lanjutkan dengan item genre lainnya jika diperlukan -->
+    </ul>
+    <p>Asal Negara: <span id="asal-negara">Amerika Serikat</span></p>
+    <p>Pemain:</p>
+    <ul>
+      <li><span id="pemain-1">Nama Pemain 1</span></li>
+      <!-- Lanjutkan dengan item pemain lainnya jika diperlukan -->
+    </ul>
+    <p>Penulis Skenario:</p>
+    <ul>
+      <li><span id="penulis-skenario-1">Penulis Skenario 1</span></li>
+      <!-- Lanjutkan dengan item penulis skenario lainnya jika diperlukan -->
+    </ul>
+    <p>Sutradara: <span id="sutradara">Michael Brown</span></p>
+  </div>
+
+  <!-- Bagian Ulasan -->
+  <div class="ulasan">
+    <h2>Bagian Ulasan</h2>
+    <!-- Isi bagian ulasan di sini -->
+  </div>
+
+</div>
+
+<!-- Bootstrap JS (diperlukan jQuery) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

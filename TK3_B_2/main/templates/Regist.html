@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - PacilFlix</title>
+  <title>Register - PacilFlix</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <!-- Font Awesome -->
@@ -38,8 +38,8 @@
 <body>
 
 <div class="container">
-  <h2 class="text-center mb-4">Login - PacilFlix</h2>
-  <form id="loginForm">
+  <h2 class="text-center mb-4">Register - PacilFlix</h2>
+  <form id="registerForm">
     <div class="form-group">
       <label for="username">Username:</label>
       <input type="text" class="form-control" id="username" name="username" required>
@@ -48,31 +48,28 @@
       <label for="password">Password:</label>
       <input type="password" class="form-control" id="password" name="password" required>
     </div>
-    <button type="submit" class="btn btn-dark">LOGIN</button>
+    <div class="form-group">
+      <label for="country">Negara Asal:</label>
+      <input type="text" class="form-control" id="country" name="country" required>
+    </div>
+    <button type="submit" class="btn btn-dark">DAFTAR</button>
   </form>
-  <div class="text-center mt-3">
-    <p>Belum punya akun? <a href="registrasi.html" class="text-light">Daftar disini</a></p>
-  </div>
 </div>
 
 <script>
-  document.getElementById("loginForm").addEventListener("submit", function(event) {
+  document.getElementById("registerForm").addEventListener("submit", function(event) {
     event.preventDefault(); // Mencegah formulir dari mengirimkan data dan melakukan refresh halaman
 
     // Ambil nilai dari input
     var username = document.getElementById("username").value;
     var password = document.getElementById("password").value;
+    var country = document.getElementById("country").value;
 
-    // Lakukan validasi sederhana
-    if (username === "admin" && password === "admin123") {
-      // Simpan session (di sini hanya digunakan untuk menandakan bahwa pengguna telah login)
-      sessionStorage.setItem("isLoggedIn", "true");
-      // Redirect ke halaman 'Daftar Tayangan'
-      window.location.href = "daftar_tayangan.html";
-    } else {
-      // Tampilkan pesan error
-      alert("Username atau password salah. Silakan coba lagi.");
-    }
+    // Lakukan validasi sederhana dan simpan data pengguna
+    // Di sini Anda dapat menambahkan kode untuk menyimpan data pengguna ke database atau penyimpanan lainnya
+    alert("Registrasi berhasil untuk username: " + username + ", Negara Asal: " + country);
+    // Redirect ke halaman login setelah registrasi berhasil
+    window.location.href = "Login.html";
   });
 </script>
 

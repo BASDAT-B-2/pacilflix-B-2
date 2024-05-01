@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Tayangan - PacilFlix</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      background-color: #471e1e; /* Warna Hitam */
+      color: #ffffff; /* Warna Teks Putih */
+    }
+
+    .btn, th, td {
+      color: #ffffff; /* Warna Tulisan Putih */
+    }
+
+    /* Gaya tambahan untuk tabel */
+    .table-custom {
+      border-radius: 20px; /* Aksen lengkungan */
+      overflow: hidden; /* Menghilangkan sisi lengkungan yang terpotong */
+      background-color: #4e4e4e; /* Warna latar belakang */
+    }
+
+    /* Gaya tambahan untuk header tabel */
+    .table-custom thead {
+      background-color: #2c2c2c; /* Warna latar belakang header */
+    }
+
+    /* Gaya tambahan untuk teks di header tabel */
+    .table-custom th {
+      border: none; /* Hapus border di header */
+    }
+
+    /* Gaya tambahan untuk baris tabel */
+    .table-custom tbody tr {
+      background-color: #363636; /* Warna latar belakang baris */
+    }
+
+    /* Gaya tambahan untuk tombol pada tabel */
+    .table-custom .btn {
+      border-radius: 10px; /* Aksen lengkungan pada tombol */
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar Pengguna (Login) -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">PacilFlix</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Daftar Tayangan</a>
+      </li>
+    
+    </ul>
+  </div>
+</nav>
+
+<!-- Isi Halaman Web -->
+<div class="container mt-4">
+  <h1 class="mb-4">Top 10</h1>
+
+  <!-- Input Pencarian Tayangan -->
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Cari Berdasarkan Judul..." aria-describedby="searchButton">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>
+    </div>
+  </div>
+
+  <!-- Opsi Top 10 Tayangan Terbaik -->
+  <!-- Dihapus sesuai permintaan -->
+
+  <!-- Tabel untuk Menampilkan Tayangan -->
+  <table class="table table-bordered table-custom">
+    <thead>
+      <tr>
+        <th scope="col">Peringkat</th>
+        <th scope="col">Judul</th>
+        <th scope="col">Sinopsis</th>
+        <th scope="col">Trailer URL</th>
+        <th scope="col">Tanggal Rilis Trailer</th>
+        <th scope="col">Total View 7 Hari Terakhir</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Isi tabel dengan data tayangan -->
+      <tr>
+        <td>1</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Isi Halaman Web -->
+<div class="container mt-4">
+  <h1 class="mb-4">Film</h1>
+
+<!-- Tabel untuk Menampilkan Tayangan -->
+<table class="table table-bordered table-custom">
+  <thead>
+    <tr>
+      <th scope="col" style="width: 20%;">Judul</th>
+      <th scope="col" style="width: 30%;">Sinopsis</th>
+      <th scope="col" style="width: 20%;">Trailer URL</th>
+      <th scope="col" style="width: 15%;">Tanggal Rilis Trailer</th>
+      <th scope="col" style="width: 15%;">Tayangan</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Isi tabel dengan data tayangan -->
+    <!-- Isi tabel dengan data tayangan -->
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td><button class="btn btn-primary">Tayangan</button></td>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><button class="btn btn-primary">Tayangan</button></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><button class="btn btn-primary">Tayangan</button></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><button class="btn btn-primary">Tayangan</button></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><button class="btn btn-primary">Tayangan</button></td>
+      </tr>
+ <!-- Isi tabel dengan data tayangan -->
+ <tr>
+  <td> </td>
+  <td> </td>
+  <td> </td>
+  <td> </td>
+  <td><button class="btn btn-primary">Tayangan</button></td>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><button class="btn btn-primary">Tayangan</button></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><button class="btn btn-primary">Tayangan</button></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><button class="btn btn-primary">Tayangan</button></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td><button class="btn btn-primary">Tayangan</button></td>
+  </tr>
+
+
+</tr>
+    
+    </tr>
+    <!-- Lanjutkan baris-baris berikutnya untuk tayangan lainnya -->
+  </tbody>
+</table>
+</div>
+
+<!-- Isi Halaman Web -->
+<div class="container mt-4">
+  <h1 class="mb-4">Series</h1>
+
+<!-- Tabel untuk Menampilkan Tayangan -->
+<table class="table table-bordered table-custom">
+  <thead>
+    <tr>
+      <th scope="col" style="width: 20%;">Judul</th>
+      <th scope="col" style="width: 30%;">Sinopsis</th>
+      <th scope="col" style="width: 20%;">Trailer URL</th>
+      <th scope="col" style="width: 15%;">Tanggal Rilis Trailer</th>
+      <th scope="col" style="width: 15%;">Tayangan</th>
+    </tr>
+  </thead>
+  <tbody>
+      <!-- Isi tabel dengan data tayangan -->
+      <tr>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td> </td>
+        <td><button class="btn btn-primary">Tayangan</button></td>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><button class="btn btn-primary">Tayangan</button></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><button class="btn btn-primary">Tayangan</button></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><button class="btn btn-primary">Tayangan</button></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><button class="btn btn-primary">Tayangan</button></td>
+        </tr>
+ 
+      
+      </tr>
+      <!-- Lanjutkan baris-baris berikutnya untuk tayangan lainnya -->
+    </tbody>
+  </table>
+</div>
+
+
+<!-- Bootstrap JS (diperlukan jQuery) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
