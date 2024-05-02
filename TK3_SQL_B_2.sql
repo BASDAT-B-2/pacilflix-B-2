@@ -59,6 +59,24 @@ CREATE TABLE tayangan (
     id_sutradara UUID
 );
 
+CREATE TABLE memainkan_tayangan (
+    id_tayangan UUID,
+	id_pemain UUID
+);
+
+CREATE TABLE menulis_skenario_tayangan (
+    id_tayangan UUID,
+	id_penulis_skenario UUID
+);
+
+CREATE TABLE genre_tayangan (
+    id_tayangan UUID,
+	genre varchar(50)
+);
+
+CREATE TABLE perusahaan_produksi (
+    nama varchar(100)
+);
 
 
 CREATE TABLE persetujuan (
