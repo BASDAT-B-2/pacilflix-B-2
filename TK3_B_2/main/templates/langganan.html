@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Subscription</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+        }
+        * {
+            font-family: sans-serif;
+        }
+
+        .center-content {
+            margin: 0 auto;
+            width: fit-content;
+        }
+
+        .content-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            min-width: 1000px;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .content-table thead tr {
+            background-color: #0000aa;
+            color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .content-table th,
+        .content-table td {
+            padding: 12px 15px;
+            text-align: center;
+        }
+
+        .content-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .content-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .content-table tbody tr:last-of-type {
+            border-bottom: 2px solid #0000aa;
+        }
+
+        .content-table tbody tr.active-row {
+            font-weight: bold;
+            color: #0000aa;
+        }
+        
+        .dropdown {
+            display: inline-block;
+            position: relative;
+        }
+
+        .dropdown .dropbtn {
+            font-size: 16px;  
+            border: none;
+            outline: none;
+            color: rgb(0, 0, 0);
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .card-container{
+            display: flex;
+            justify-content: wrap;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            position: relative;
+        }
+
+        .card{
+            margin: 20px;
+            width: 300px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .card-content{
+            padding: 16px;
+        }
+
+        .card-container h3{
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        .card-container p{
+            font-size: 16px;
+            color: #747474;
+            line-height: 1;
+            
+        }
+        .card-container .btn{
+            display: inline-block;
+            padding: 8px 50px;
+            background-color: #0000aa;
+            color: #ddd;
+            border-radius: 4px;
+            margin-top: 15px;
+            margin-left: 70px;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <h1 class="center-content">Subscription</h1>
+    <br>
+    <div class="center-content">
+        <h3 style="display: inline-block;">Active Subscription : Gold</h3>
+          
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Monthly Price</th>
+                    <th>Resolution</th>
+                    <th>Supported Device</th>
+                    <th>Start Date</th>
+                    <th>Expiration Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Karen Smith</th>
+                    <th>Rp 355.999/month</th>
+                    <th>4k</th>
+                    <th>Smartphone, Ipad, TV, Laptop</th>
+                    <th>April 21, 2023</th>
+                    <th>May 21, 2023</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <div class="center-content">
+    <h1 style="text-align:center">Choose your plan</h1>
+    <div class="card-container">
+        <div class="card">
+            <div class="card-content">
+                <h3>Gold</h3>
+                <p>Resolution : 4k</p>
+                <p>Watch on Smartphone, Ipad, Laptop, and TV </p>
+                <p>Rp 355.999/month</p>
+                <a href="" class="btn">Buy</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <h3>Silver</h3>
+                <p>Resolution : 1080</p>
+                <p>Watch on Smartphone and Ipad </p>
+                <p>Rp 159.999/month</p>
+                <a href="" class="btn">Buy</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-content">
+                <h3>Bronze</h3>
+                <p>Resolution : 720</p>
+                <p>Watch on Smartphone </p>
+                <p>Rp 79.999/month</p>
+                <a href="" class="btn">Buy</a>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="center-content" style="margin-top: 60px;">Transaction History</h1>
+    <br>
+    <div class="center-content">
+        <table class="content-table">
+            <thead>
+                <tr>
+                    <th>Package Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Payment Method</th>
+                    <th>Payment Date</th>
+                    <th>Total Paid</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>Silver</th>
+                    <th>August 31, 2021</th>
+                    <th>October 1, 2021</th>
+                    <th>Credit Card</th>
+                    <th>August 31, 2021</th>
+                    <th>Rp 159.999</th>
+                </tr>
+                <tr>
+                    <th>Silver</th>
+                    <th>December 16, 2021</th>
+                    <th>January 16 1, 2022</th>
+                    <th>Paypal</th>
+                    <th>December 16, 2021</th>
+                    <th>Rp 159.999</th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    
+</div>
+</body>
+</html>
