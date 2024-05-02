@@ -44,6 +44,7 @@
     .table-custom .btn {
       border-radius: 10px; /* Aksen lengkungan pada tombol */
     }
+    
   </style>
 </head>
 <body>
@@ -54,14 +55,19 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+   <!-- Tambahkan ini untuk menampilkan username -->
+ <ul class="navbar-nav ml-auto">
+  <li class="nav-item">
+    <span class="nav-link username">Halo, Gracia!</span>
+  </li>
+</ul>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
         <a class="nav-link" href="#">Daftar Tayangan</a>
       </li>
-    
-    </ul>
-  </div>
+
+</div>
 </nav>
 
 <!-- Isi Halaman Web -->
@@ -77,7 +83,16 @@
   </div>
 
   <!-- Opsi Top 10 Tayangan Terbaik -->
-  <!-- Dihapus sesuai permintaan -->
+<!-- Input Opsi -->
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="countrySelect">Opsi:</label>
+  </div>
+  <select class="custom-select" id="countrySelect">
+    <option value="global" selected>Secara Global</option>
+    <option value="local">Berdasarkan Negara Pengguna</option>
+  </select>
+</div>
 
   <!-- Tabel untuk Menampilkan Tayangan -->
   <table class="table table-bordered table-custom">
