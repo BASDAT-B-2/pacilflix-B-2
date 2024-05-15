@@ -38,8 +38,12 @@
 <body>
 
 <div class="container">
+  {% if error %}
+  <div class="alert alert-danger">{{ error }}</div>
+  {% endif %}
   <h2 class="text-center mb-4">Register - PacilFlix</h2>
-  <form id="registerForm">
+  <form method="POST" action="{% url 'authentication:register' %}">
+    {% csrf_token %}
     <div class="form-group">
       <label for="username">Username:</label>
       <input type="text" class="form-control" id="username" name="username" required>
@@ -65,20 +69,42 @@
 </div>
 
 <script>
-  document.getElementById("registerForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Mencegah formulir dari mengirimkan data dan melakukan refresh halaman
-
-    // Ambil nilai dari input
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
-    var country = document.getElementById("country").value;
-
-    // Lakukan validasi sederhana dan simpan data pengguna
-    // Di sini Anda dapat menambahkan kode untuk menyimpan data pengguna ke database atau penyimpanan lainnya
-    alert("Registrasi berhasil untuk username: " + username + ", Negara Asal: " + country);
-    // Redirect ke halaman login setelah registrasi berhasil
-    window.location.href = "tayangan:show_tayangan";
+  document.getElementById('register-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      fetch("{% url 'authentication:register' %}", {
+          method: "POST",
+          body: new FormData(this),
+          headers: {
+              "X-CSRFToken": "{{ csrf_token }}"
+          }
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.status === 'success') {
+              alert("Pendaftaran akun berhasil! Silakan masuk");
+              window.location.href = "{% url 'authentication:login' %}";
+          } else {
+              alert("Username sudah terdaftar. Silakan pilih username lain");
+          }
+      });
   });
+
+  // document.getElementById("registerForm").addEventListener("submit", function(event) {
+  //   event.preventDefault(); // Mencegah formulir dari mengirimkan data dan melakukan refresh halaman
+
+  //   // Ambil nilai dari input
+  //   var username = document.getElementById("username").value;
+  //   var password = document.getElementById("password").value;
+  //   var country = document.getElementById("country").value;
+
+  //   // Lakukan validasi sederhana dan simpan data pengguna
+  //   // Di sini Anda dapat menambahkan kode untuk menyimpan data pengguna ke database atau penyimpanan lainnya
+  //   alert("Registrasi berhasil untuk username: " + username + ", Negara Asal: " + country);
+  //   // Redirect ke halaman login setelah registrasi berhasil
+  //   window.location.href = "tayangan:show_tayangan";
+  // });
+
 </script>
 
 </body>

@@ -4,36 +4,56 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages  
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.db import connection
+from django.http import HttpResponseRedirect, JsonResponse
+from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 
-# Create your views here.
+@csrf_exempt
 def register(request):
-    form = UserCreationForm()
-
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Your account has been successfully created!')
-            return redirect('main:login')
-    context = {'form':form}
-    return render(request, 'register.html', context)
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        country = request.POST.get("country")
+        try :
+            with connection.cursor() as cursor:
+                cursor.execute(f"INSERT INTO PENGGUNA VALUES ('{username}', '{password}', '{country}')")
+            return render(request, "register.html")
+        except Exception as e:
+            return render(request, "register.html", {'error':e})
+    else:
+        return render(request, "register.html")
 
+@csrf_exempt
 def login_user(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('main:show_main')
+    context = {"error": ""}
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        with connection.cursor() as cursor:
+            cursor.execute(f"SELECT username, negara_asal FROM PENGGUNA WHERE username='{username}' AND password='{password}'")
+            pengguna = cursor.fetchall()
+            print(pengguna)
+        
+        if len(pengguna) != 0:
+            username = pengguna[0][0]
+            negara_asal = pengguna[0][1]
+            response = HttpResponseRedirect(reverse("tayangan:show_tayangan"))
+            response.set_cookie('username', username)
+            response.set_cookie('negara', negara_asal)
+            response.set_cookie('is_authenticated', "True")
+            return response
         else:
-            messages.info(request, 'Sorry, incorrect username or password. Please try again.')
-    context = {}
+            context = {"error": "Username atau password salah. Silakan coba lagi."}
+            return render(request, 'login.html', context)
     return render(request, 'login.html', context)
 
 def logout_user(request):
-    logout(request)
-    return redirect('main:login')
+    response = HttpResponseRedirect(reverse('authentication:landing'))
+    response.delete_cookie('username')
+    response.delete_cookie('negara')
+    response.delete_cookie('is_authenticated')
+    return response
 
 def landing(request):
     return render(request, 'LoginRegist.html')

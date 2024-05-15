@@ -149,7 +149,7 @@ ALTER TABLE paket
 ADD PRIMARY KEY (nama) ;
 
 ALTER TABLE dukungan_perangkat
-ADD PRIMARY KEY (nama_paket, dukungan_perangkat);
+ADD PRIMARY KEY (nama_paket, dukungan_perangkat),
 ADD CONSTRAINT dukungan_perangkat_ibfk_1 FOREIGN KEY (nama_paket) REFERENCES paket (nama) ON DELETE CASCADE ON UPDATE CASCADE;
 
 
@@ -415,8 +415,7 @@ INSERT INTO pemain VALUES ('8fde8371-c9e7-4d25-8194-4da791b7d51d'),
 	('3cfec7d0-024e-4a2f-b990-1abfe3c22e56'),
 	('6e3db063-202e-43b2-8a8f-ced5d2498e29'),
 	('2d0c0b8b-fb38-4c9b-a0c6-7a59f74f05fd'),
-	('92b0e861-bd9d-4993-b3e1-74e1f5ee73e9'),
-	('2a76ff8e-6866-4745-8727-d60f6fc1f8d0');
+	('92b0e861-bd9d-4993-b3e1-74e1f5ee73e9');
 
 INSERT INTO sutradara VALUES ('92b0e861-bd9d-4993-b3e1-74e1f5ee73e9'),
 	('2a3128f1-1275-4e69-8c3b-21c21cfed84c'),
@@ -484,7 +483,7 @@ INSERT INTO memainkan_tayangan VALUES ('164c4142-3163-4e85-8b36-36b2b2e9c31c','8
 	('67b9a84e-75e1-462e-93c3-3ff11095b897','6e3db063-202e-43b2-8a8f-ced5d2498e29'),
 	('5e567f84-6bcf-41d2-89c8-8d24b3b7f95e','2d0c0b8b-fb38-4c9b-a0c6-7a59f74f05fd'),
 	('7c24374a-9f6d-45df-8c02-5df825e255d7','92b0e861-bd9d-4993-b3e1-74e1f5ee73e9'),
-	('60b9e2aa-1467-44db-b5de-451d654355e1','2a76ff8e-6866-4745-8727-d60f6fc1f8d0'),
+	('60b9e2aa-1467-44db-b5de-451d654355e1','1a76ff8e-6866-4745-8727-d60f6fc1f8d0'),
 	('67b9a84e-75e1-462e-93c3-3ff11095b898','0a2f7918-5027-4c56-903e-9a02a6a39bfa'),
 	('68f41e8a-38fd-4e16-a59a-f4a4d0aa0c92','2d2093ef-3d85-4433-a3ac-f141a3b10280'),
 	('7c24374a-9f6d-45df-8c02-5df825e255d8','7d65f1b9-4990-4c21-96ff-986301d19f96'),
