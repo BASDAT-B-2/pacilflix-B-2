@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - PacilFlix</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      background-color: #471e1e; /* Warna Hitam */
+      color: #ffffff; /* Warna Teks Putih */
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 20px;
+      border: 1px solid #ffffff; /* Border Putih */
+      border-radius: 5px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-control {
+      border-color: #ffffff; /* Border Putih */
+    }
+
+    .btn {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2 class="text-center mb-4">Register - PacilFlix</h2>
+  <form id="registerForm">
+    <div class="form-group">
+      <label for="username">Username:</label>
+      <input type="text" class="form-control" id="username" name="username" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" class="form-control" id="password" name="password" required>
+    </div>
+    <div class="form-group">
+      <label for="country">Negara Asal:</label>
+      <input type="text" class="form-control" id="country" name="country" required>
+    </div>
+    <button type="submit" class="btn btn-dark">DAFTAR</button>
+  </form>
+</div>
+
+<script>
+  document.getElementById("registerForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Mencegah formulir dari mengirimkan data dan melakukan refresh halaman
+
+    // Ambil nilai dari input
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    var country = document.getElementById("country").value;
+
+    // Lakukan validasi sederhana dan simpan data pengguna
+    // Di sini Anda dapat menambahkan kode untuk menyimpan data pengguna ke database atau penyimpanan lainnya
+    alert("Registrasi berhasil untuk username: " + username + ", Negara Asal: " + country);
+    // Redirect ke halaman login setelah registrasi berhasil
+    window.location.href = "Login.html";
+  });
+</script>
+
+</body>
+{% endblock content %}
