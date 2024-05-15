@@ -48,7 +48,7 @@
       <label for="password">Password:</label>
       <input type="password" class="form-control" id="password" name="password" required>
     </div>
-    <button type="submit" class="btn btn-dark">LOGIN</button>
+    <a type="submit" class="btn btn-dark" href="{% url 'tayangan:show_tayangan' %}">LOGIN</a>
   </form>
   <div class="text-center mt-3">
     <p>Belum punya akun? <a href="{% url 'authentication:register' %}" class="text-light">Daftar disini</a></p>
