@@ -6,7 +6,7 @@ SET search_path to PACILFLIX;
 CREATE TABLE pengguna (
     username varchar(50),
     password varchar(50) NOT NULL,
-    id_tayangan UUID
+    negara_asal varchar(50) NOT NULL
 );
 
 CREATE TABLE paket (
@@ -144,7 +144,6 @@ CREATE TABLE tayangan_terunduh (
 
 ALTER TABLE pengguna
 ADD PRIMARY KEY (username);
-ADD CONSTRAINT pengguna_ibfk_1 FOREIGN KEY (id_tayangan) REFERENCES tayangan (id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE paket
 ADD PRIMARY KEY (nama) ;
@@ -232,14 +231,14 @@ ADD PRIMARY KEY (id_tayangan, username, timestamp),
 ADD CONSTRAINT tayangan_terunduh_ibfk_1 FOREIGN KEY (id_tayangan) REFERENCES tayangan (id) ON DELETE CASCADE ON UPDATE CASCADE,
 ADD CONSTRAINT tayangan_terunduh_ibfk_2 FOREIGN KEY (username) REFERENCES pengguna (username) ON DELETE CASCADE ON UPDATE CASCADE;
 
-INSERT INTO pengguna VALUES ('coolcat123','pass123','72d21279-3823-4f33-a64d-d63a5b0bfb11'),
-	('skywalker87','skywalker87pass','52ab837e-ff35-4932-80b0-d00198ba2543'),
-	('rainbowunicorn','unicorn567','7f011a9f-1d3f-4ef9-8a8e-72d1e443d194'),
-	('gamer_guru','gamingrocks','72d21279-3823-4f33-a64d-d63a5b0bfb11'),
-	('adventureseeker','exploredora','72d21279-3823-4f33-a64d-d63a5b0bfb11'),
-	('musiclover3','melody8','52ab837e-ff35-4932-80b0-d00198ba2543'),
-	('techwizard101','code09','7f011a9f-1d3f-4ef9-8a8e-72d1e443d194'),
-	('bookworm99','readingisfun','72d21279-3823-4f33-a64d-d63a5b0bfb11');
+INSERT INTO pengguna VALUES ('coolcat123','pass123','Indonesia'),
+	('skywalker87','skywalker87pass','Singapore'),
+	('rainbowunicorn','unicorn567','Malaysia'),
+	('gamer_guru','gamingrocks','Indonesia'),
+	('adventureseeker','exploredora','Indonesia'),
+	('musiclover3','melody8','Indonesia'),
+	('techwizard101','code09','Thailand'),
+	('bookworm99','readingisfun','Vietnam');
 
 INSERT INTO paket VALUES ('gold',35,'4k'),
 	('silver',15,'1080'),
