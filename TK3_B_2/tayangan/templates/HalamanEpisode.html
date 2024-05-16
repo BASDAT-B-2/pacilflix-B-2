@@ -1,89 +1,91 @@
 {% extends 'base.html' %}
-{% block content %}
+{% load static %}
 
+{% block meta %}
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Halaman Episode - PacilFlix</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <style>
-    body {
-      background-image: url('https://i.pinimg.com/564x/c1/56/3c/c1563cc3942d5081b510179102629916.jpg'); /* URL gambar transparan */
-      background-size: cover; /* Penyesuaian ukuran gambar */
-      color: #ffffff; /* Warna Teks Putih */
-    }
-
-    .btn {
-      border-radius: 10px; /* Aksen lengkungan pada tombol */
-      margin-right: 10px; /* Spasi kanan */
-    }
-
-    /* Gaya tambahan untuk judul */
-    .judul {
-      margin-top: 30px; /* Spasi atas */
-      margin-bottom: 20px; /* Spasi bawah */
-      font-weight: bold; /* Teks tebal */
-      font-size: 36px; /* Ukuran teks besar */
-    }
-
-    /* Gaya tambahan untuk informasi episode */
-    .episode-info {
-      margin-bottom: 20px; /* Spasi bawah */
-      font-weight: bold; /* Teks tebal */
-      font-size: 20px; /* Ukuran teks besar */
-    }
-
-    /* Gaya tambahan untuk bagian ulasan */
-    .ulasan {
-      margin-top: 30px; /* Spasi atas */
-      font-size: 24px; /* Ukuran teks besar */
-    }
-
-    /* Gaya tombol tonton */
-    .btn-tonton {
-      background-color: #000000; /* Hitam */
-      border-color: #000000; /* Hitam */
-      color: #ffffff;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Episode Page</title>
+    <style>
+        body {
+            background-color: #8b1f13; /* Background merah bata */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #d3d3d3; /* Warna abu-abu gelap */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .film-details {
+            margin-bottom: 20px;
+            color: white; /* Teks putih */
+        }
+        .film-details h1, h2 {
+            margin-bottom: 10px;
+        }
+        .film-buttons {
+            margin-bottom: 20px;
+        }
+        .film-buttons button {
+            margin-right: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        .film-buttons button.primary {
+            background-color: #9fa8c5;
+            color: #fff;
+            margin: 10px 20px;
+        }
+        .film-buttons button.secondary {
+            background-color: #6c757d;
+            color: #fff;
+        }
+        .film-buttons button.favorite {
+            background-color: #ffc107;
+            color: #212529;
+        }
+        .film-reviews button {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: #fff;
+        }
+    </style>
 </head>
+{% endblock meta %}
+
+{% block content %}
 <body>
-
-<div class="container mt-4">
-  <h1 class="mb-4 judul">Halaman Episode</h1>
-  <!-- Informasi Episode -->
-  <div class="episode-info">
-    <h2>Judul: <span id="judul-episode">-------</span></h2>
-    <h3>Sub Judul: <span id="sub-judul">-------</span></h3>
-    <button class="btn btn-tonton">Tonton</button>
-    <p>Episode Lainnya:</p>
-    <ul>
-      <li><a href="#" id="link-episode-1">Episode 1</a></li>
-      <li><a href="#" id="link-episode-1">Episode 2</a></li>
-      <li><a href="#" id="link-episode-1">Episode 3</a></li>
-      <!-- Lanjutkan dengan link episode lainnya jika diperlukan -->
-    </ul>
-    <p>Sinopsis Episode: <span id="sinopsis-episode">-------</span></p>
-    <p>Durasi Episode: <span id="durasi-episode">-------</span></p>
-    <p>URL Episode: <a href="#" id="url-episode">www.example.com</a></p>
-    <p>Tanggal Rilis Episode: <span id="tanggal-rilis-episode">-------</span></p>
+  <div class="container">
+      <div class="film-details">
+          <h1>{{ series_title }}</h1>
+          <h2>{{ selected_episode.1 }}</h2>
+          <br><br><br><br><br><br><br><br><br><br><br>
+          <input type="range" class="form-range" min="0" max="100" id="watchrange">
+          <br><br><br>
+          <h3 style="color: white;">Other Episodes</h3>
+          <div class="film-buttons">
+              {% for episode in episodes %}
+                  <a href="{% url 'tayangan:episode' episode.1 episode.0 %}">
+                      <button class="primary">{{ episode.0|add:1 }}</button>
+                  </a>
+              {% endfor %}
+          </div>
+          
+          <p>{{ selected_episode.2 }}</p>
+          <p>{{ selected_episode.4 }}</p>
+          <p>Tanggal Rilis: {{ selected_episode.5 }}</p>
+          <p>Durasi: {{ selected_episode.3 }}</p>
+      </div>
   </div>
-
-  <!-- Bagian Ulasan -->
-  <div class="ulasan">
-    <h2>Ulasan</h2>
-    <!-- Isi bagian ulasan di sini -->
-  </div>
-
-</div>
-
-<!-- Bootstrap JS (diperlukan jQuery) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
 </body>
 {% endblock content %}
