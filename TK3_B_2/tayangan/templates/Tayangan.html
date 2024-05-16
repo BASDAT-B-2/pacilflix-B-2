@@ -196,7 +196,9 @@
       <td>{{ fi.2 }}</td>
       <td><a href="{{ fi.3 }}">{{ fi.3 }}</a></td>
       <td>{{ fi.4 }}</td>
-      <td><button class="btn btn-primary">Detail</button></td>
+      <td><a class="btn btn-primary"  href="{% url 'tayangan:show_film' fi.0 %}">
+        Detail
+    </a></td>
     </tr>
     {% endfor %}
         
