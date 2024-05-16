@@ -48,6 +48,7 @@
     
   </style>
 </head>
+
 <body>
 
 <!-- Isi Halaman Web -->
@@ -189,81 +190,18 @@
   </thead>
   <tbody>
     <!-- Isi tabel dengan data tayangan -->
-    <!-- Isi tabel dengan data tayangan -->
+    {% for fi in film %}
     <tr>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td><button class="btn btn-primary">Tayangan</button></td>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><button class="btn btn-primary">Tayangan</button></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><button class="btn btn-primary">Tayangan</button></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><button class="btn btn-primary">Tayangan</button></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><button class="btn btn-primary">Tayangan</button></td>
-      </tr>
- <!-- Isi tabel dengan data tayangan -->
- <tr>
-  <td> </td>
-  <td> </td>
-  <td> </td>
-  <td> </td>
-  <td><button class="btn btn-primary">Tayangan</button></td>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td><button class="btn btn-primary">Tayangan</button></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td><button class="btn btn-primary">Tayangan</button></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td><button class="btn btn-primary">Tayangan</button></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td><button class="btn btn-primary">Tayangan</button></td>
-  </tr>
-
-
-</tr>
-    
+      <td>{{ fi.1 }}</td>
+      <td>{{ fi.2 }}</td>
+      <td><a href="{{ fi.3 }}">{{ fi.3 }}</a></td>
+      <td>{{ fi.4 }}</td>
+      <td><a class="btn btn-primary"  href="{% url 'tayangan:show_film' fi.0 %}">
+        Detail
+    </a></td>
     </tr>
+    {% endfor %}
+        
     <!-- Lanjutkan baris-baris berikutnya untuk tayangan lainnya -->
   </tbody>
 </table>
@@ -286,43 +224,17 @@
   </thead>
   <tbody>
       <!-- Isi tabel dengan data tayangan -->
-      <tr>
-        <td> </td>
-        <td> </td>
-        <td> </td>
-        <td> </td>
-        <td><button class="btn btn-primary">Tayangan</button></td>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><button class="btn btn-primary">Tayangan</button></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><button class="btn btn-primary">Tayangan</button></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><button class="btn btn-primary">Tayangan</button></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><button class="btn btn-primary">Tayangan</button></td>
-        </tr>
- 
-      
-      </tr>
+
+    {% for se in series %}
+    <tr>
+      <td>{{ se.1 }}</td>
+      <td>{{ se.2 }}</td>
+      <td><a href="{{ se.3 }}">{{ se.3 }}</a></td>
+      <td>{{ se.4 }}</td>
+      <td><button class="btn btn-primary">Detail</button></td>
+    </tr>
+    {% endfor %}
+
       <!-- Lanjutkan baris-baris berikutnya untuk tayangan lainnya -->
     </tbody>
   </table>

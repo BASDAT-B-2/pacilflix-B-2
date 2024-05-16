@@ -224,70 +224,14 @@
     </tr>
   </thead>
   <tbody>
+    {% for fi in film %}
     <tr>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
- <!-- Isi tabel dengan data tayangan -->
- <tr>
-  <td> </td>
-  <td> </td>
-  <td> </td>
-  <td> </td>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-
-
-</tr>
-    
+      <td>{{ fi.1 }}</td>
+      <td>{{ fi.2 }}</td>
+      <td><a href="{{ fi.3 }}">{{ fi.3 }}</a></td>
+      <td>{{ fi.4 }}</td>
     </tr>
+    {% endfor %}
   </tbody>
 </table>
 </div>
@@ -308,38 +252,15 @@
   </thead>
   <tbody>
       <!-- Isi tabel dengan data tayangan -->
+      {% for se in series %}
       <tr>
-        <td> </td>
-        <td> </td>
-        <td> </td>
-        <td> </td>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
- 
-      
+        <td>{{ se.1 }}</td>
+        <td>{{ se.2 }}</td>
+        <td><a href="{{ se.3 }}">{{ se.3 }}</a></td>
+        <td>{{ se.4 }}</td>
       </tr>
+      {% endfor %}
+
     </tbody>
   </table>
 </div>

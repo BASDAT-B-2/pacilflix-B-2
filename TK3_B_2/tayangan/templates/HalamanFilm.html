@@ -68,16 +68,16 @@
 
   <!-- Informasi Film -->
   <div class="film-info">
-    <h2>Judul: <span id="judul-film">-------</span></h2>
-    <button class="btn btn-tonton">Tonton</button>
+    <h2>Judul: {{ film_tinfo.1 }}<span id="judul-film"></span></h2>
+    <button class="btn btn-tonton" >Tonton</button>
     <button class="btn btn-unduh">Unduh</button>
     <button class="btn btn-favoritkan">Favoritkan</button>
     <p>Total View: <span id="total-view">-------</span></p>
     <p>Rating Rata-Rata: <span id="rating">-------</span></p>
-    <p>Sinopsis: <span id="sinopsis">-------</span></p>
-    <p>Durasi Film: <span id="durasi">-------</span></p>
-    <p>Tanggal Rilis Film: <span id="tanggal-rilis">-------</span></p>
-    <p>URL Film: <a href="#" id="url-film">www.example.com</a></p>
+    <p>Sinopsis: <span id="sinopsis">{{ film_tinfo.2 }}</span></p>
+    <p>Durasi Film: <span id="durasi">{{ film.3 }}</span></p>
+    <p>Tanggal Rilis Film: <span id="tanggal-rilis">{{ film.2 }}</span></p>
+    <p>URL Film: <a href="{{ url_video_film }}" id="url-film">{{ film.1 }}</a></p>
     <p>Genre:</p>
     <ul>
       <li><span id="genre-1"></span></li>
