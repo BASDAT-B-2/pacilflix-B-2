@@ -8,5 +8,5 @@ urlpatterns = [
     path('trailer/', show_trailer, name='show_trailer'),
     path('series/<uuid:series_id>/', show_series, name='show_series'),
     path('film/<uuid:id>', show_film, name='show_film'),
-    path('episode/', show_episode, name='show_episode'),
+    path('episode/<uuid:series_id>/<int:episode_number>/', show_episode, name='show_episode'),
 ]
