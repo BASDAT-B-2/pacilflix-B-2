@@ -20,6 +20,13 @@
       margin-right: 10px;
     }
 
+    /* Gaya tombol tonton */
+    .btn-tonton {
+      background-color: #007bff; /* Biru */
+      border-color: #007bff; /* Biru */
+    }
+
+
     .btn-unduh {
       background-color: #000000;
       border-color: #000000;
@@ -61,6 +68,7 @@
       <li><a href="#">{{ episode.episode_title }}</a></li>
       {% endfor %}
     </ul>
+
         <!-- Tombol Unduh -->
     <form action="{% url 'daftar_unduhan:daftar_unduhan' %}" method="post">
       {% csrf_token %}
