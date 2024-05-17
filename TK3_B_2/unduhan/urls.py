@@ -1,8 +1,9 @@
 from django.urls import path
-from unduhan.views import *
+from .views import *
 
-app_name = 'unduhan'
+app_name = 'daftar_unduhan'
 
 urlpatterns = [
-    path('', show_unduhan, name='show_unduhan'),
+    path('', daftar_unduhan, name='daftar_unduhan'),
+    path('hapus_unduhan/', hapus_unduhan, name='hapus_unduhan')
 ]
