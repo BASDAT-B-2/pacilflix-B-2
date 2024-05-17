@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,46 +10,41 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     body {
-      background-image: url('https://i.pinimg.com/564x/c1/56/3c/c1563cc3942d5081b510179102629916.jpg'); /* URL gambar transparan */
-      background-size: cover; /* Penyesuaian ukuran gambar */
-      color: #ffffff; /* Warna Teks Putih */
-    }
-
-    .btn {
-      border-radius: 10px; /* Aksen lengkungan pada tombol */
-      margin-right: 10px; /* Spasi kanan */
-    }
-
-    /* Gaya tombol unduh */
-    .btn-unduh {
-      background-color: #000000; /* Hitam */
-      border-color: #000000; /* Hitam */
+      background-image: url('https://i.pinimg.com/564x/c1/56/3c/c1563cc3942d5081b510179102629916.jpg');
+      background-size: cover;
       color: #ffffff;
     }
 
-    /* Gaya tombol favoritkan */
+    .btn {
+      border-radius: 10px;
+      margin-right: 10px;
+    }
+
+    .btn-unduh {
+      background-color: #000000;
+      border-color: #000000;
+      color: #ffffff;
+    }
+
     .btn-favoritkan {
-      background-color: #ffffff; /* Putih */
-      border-color: #ffffff; /* Putih */
-      color: #000000; /* Teks Hitam */
+      background-color: #ffffff;
+      border-color: #ffffff;
+      color: #000000;
     }
 
-    /* Gaya tambahan untuk judul */
     .judul {
-      margin-top: 30px; /* Spasi atas */
-      margin-bottom: 20px; /* Spasi bawah */
-      font-weight: bold; /* Teks tebal */
+      margin-top: 30px;
+      margin-bottom: 20px;
+      font-weight: bold;
     }
 
-    /* Gaya tambahan untuk informasi series */
     .series-info {
-      margin-bottom: 20px; /* Spasi bawah */
-      font-weight: bold; /* Teks tebal */
+      margin-bottom: 20px;
+      font-weight: bold;
     }
 
-    /* Gaya tambahan untuk bagian ulasan */
     .ulasan {
-      margin-top: 30px; /* Spasi atas */
+      margin-top: 30px;
     }
   </style>
 </head>
@@ -59,44 +53,95 @@
 <div class="container mt-4">
   <h1 class="mb-4 judul">Halaman Series</h1>
 
-  <!-- Informasi Series -->
   <div class="series-info">
-    <h2>Judul: <span id="judul-series">-------</span></h2>
+    <h2>Judul: <span id="judul-series">{{ series.judul }}</span></h2>
     <p>Episode:</p>
     <ul>
-      <li><a href="#" id="link-episode-1">Episode 1</a></li>
-      <!-- Lanjutkan dengan link episode lainnya jika diperlukan -->
+      {% for episode in series.episode_set.all %}
+      <li><a href="{{ episode.url }}">{{ episode.nomor }} - {{ episode.judul }}</a></li>
+      {% endfor %}
     </ul>
     <button class="btn btn-unduh">Unduh</button>
     <button class="btn btn-favoritkan">Favoritkan</button>
-    <p>Total View: <span id="total-view">-------</span></p>
-    <p>Rating Rata-Rata: <span id="rating">-------</span></p>
-    <p>Sinopsis: <span id="sinopsis">-------</span></p>
+    <p>Total View: <span id="total-view">{{ series.total_view }}</span></p>
+    <p>Rating Rata-Rata: <span id="rating">{{ series.rating }}</span></p>
+    <p>Sinopsis: <span id="sinopsis">{{ series.sinopsis }}</span></p>
     <p>Genre:</p>
     <ul>
-      <li><span id="genre-1">-------</span></li>
-      <!-- Lanjutkan dengan item genre lainnya jika diperlukan -->
+      {% for genre in series.genre.all %}
+      <li>{{ genre.nama }}</li>
+      {% endfor %}
     </ul>
-    <p>Asal Negara: <span id="asal-negara">-------</span></p>
+    <p>Asal Negara: <span id="asal-negara">{{ series.asal_negara }}</span></p>
     <p>Pemain:</p>
     <ul>
-      <li><span id="pemain-1">-------</span></li>
-      <!-- Lanjutkan dengan item pemain lainnya jika diperlukan -->
+      {% for pemain in series.pemain.all %}
+      <li>{{ pemain.nama }}</li>
+      {% endfor %}
     </ul>
     <p>Penulis Skenario:</p>
     <ul>
-      <li><span id="penulis-skenario-1">-------</span></li>
-      <!-- Lanjutkan dengan item penulis skenario lainnya jika diperlukan -->
+      {% for penulis in series.penulis_skenario.all %}
+      <li>{{ penulis.nama }}</li>
+      {% endfor %}
     </ul>
-    <p>Sutradara: <span id="sutradara">-------</span></p>
+    <p>Sutradara: <span id="sutradara">{{ series.sutradara }}</span></p>
   </div>
 
-  <!-- Bagian Ulasan -->
-  <div class="ulasan">
-    <h2>Ulasan</h2>
-    <!-- Isi bagian ulasan di sini -->
-  </div>
+ <!-- Bagian Ulasan -->
+ <div class="container">
+  <h2>Ulasan</h2>
 
+  <form method="POST" >
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="username">username:</label>
+      <input type="text" class="form-control" id="username" name="username" required>
+    </div>
+    <div class="form-group">
+      <label for="deskripsi">deskripsi:</label>
+      <input type="text" class="form-control" id="deskripsi" name="deskripsi" required>
+    </div>
+    <div>
+      <label for="rating">Rating:</label>
+      <select class="form-control" id="rating" name="rating" required>
+        <option value="">Pilih Rating</option>
+        <option value=1>1</option>
+        <option value=2>2</option>
+        <option value=3>3</option>
+        <option value=4>4</option>
+        <option value=5>5</option>
+      </select>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-dark" >Submit</button> 
+    </div>
+  </form>
+
+  <!-- Daftar Ulasan -->
+  <h3>Daftar Ulasan</h3>
+  <table class="table table-bordered table-custom">
+    <thead>
+      <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Deskripsi</th>
+        <th scope="col">Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Isi tabel dengan data ulasan -->
+      {% for ulasan in series.ulasan_set.all %}
+      <tr>
+        <td>{{ ulasan.username }}</td>
+        <td>{{ ulasan.deskripsi }}</td>
+        <td>{{ ulasan.rating }}</td>          
+      </tr>
+      {% endfor %}
+    
+    </tbody>
+  </table>
+
+</div>
 </div>
 
 <!-- Bootstrap JS (diperlukan jQuery) -->

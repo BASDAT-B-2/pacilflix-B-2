@@ -187,3 +187,10 @@ def show_trailer(request):
         'film' : film
     }
     return render(request, "trailer.html", context)
+
+def series_detail(request, series_id):
+    series = show_series.objects.get(id=series_id)
+    context = {
+        'series': series,
+    }
+    return render(request, 'HalamanSeries.html', context)
