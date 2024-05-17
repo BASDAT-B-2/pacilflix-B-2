@@ -183,7 +183,7 @@
                 alert("Payment successful");
                 window.location.href = "{% url 'tayangan:show_tayangan' %}";
             } else {
-                alert("Payment failed");
+                alert("You already had transaction today. Try again tomorrow!");
             }
         });
     });

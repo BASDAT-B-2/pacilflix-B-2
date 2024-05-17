@@ -128,6 +128,32 @@ def show_film(request,id):
             data_ulasan = cursor.fetchall()
             ulasan = data_ulasan
 
+            cursor.execute('SELECT genre FROM GENRE_TAYANGAN WHERE id_tayangan = %s', (id,))
+            genres = cursor.fetchall()
+            cursor.execute('''
+                SELECT p.nama 
+                FROM contributors p 
+                JOIN MEMAINKAN_TAYANGAN m ON p.id = m.id_pemain 
+                JOIN pemain x ON p.id = x.id 
+                WHERE m.id_tayangan = %s
+            ''', (id,))            
+            actors = cursor.fetchall()
+            cursor.execute('''
+                SELECT p.nama 
+                FROM contributors p 
+                JOIN menulis_skenario_tayangan m ON p.id = m.id_penulis_skenario 
+                JOIN penulis_skenario x ON p.id = x.id 
+                WHERE m.id_tayangan = %s
+            ''', (id,))              
+            writers = cursor.fetchall()
+            cursor.execute('''
+                SELECT p.nama 
+                FROM contributors p 
+                JOIN tayangan t on t.id_sutradara = p.id
+                WHERE t.id = %s
+            ''', (id,)) 
+            director = cursor.fetchone()
+
     # hitung_tujuh = datetime.now() - timedelta(days=7)
     
     # with connection.cursor() as cursor:
@@ -144,7 +170,10 @@ def show_film(request,id):
         'film' : film,
         'film_tinfo' : film_tinfo,
         'ulasan' : ulasan,
-        # 'totalview' : totalview
+        'genres' : genres,
+        'actors': actors,
+        'writers':writers,
+        'director':director
     }
     return render(request, "HalamanFilm.html", context)
 

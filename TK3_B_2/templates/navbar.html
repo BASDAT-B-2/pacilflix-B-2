@@ -8,32 +8,32 @@
       <ul class="navbar-nav mr-auto">
         {% if request.COOKIES.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'tayangan:show_tayangan' %}">Daftar Tayangan</a>
+            <a class="nav-link" href="{% url 'tayangan:show_tayangan' %}">Watching List</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'kontributor:show_kontributor' %}">Daftar Kontributor</a>
+            <a class="nav-link" href="{% url 'kontributor:show_kontributor' %}">Contributors</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'favorit:show_favorit' %}">Kelola Daftar Favorit</a>
+            <a class="nav-link" href="{% url 'daftar_favorit:show_favorit' %}">My Favorite</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'unduhan:show_unduhan' %}">Kelola Daftar Unduhan</a>
+            <a class="nav-link" href="{% url 'daftar_unduhan:daftar_unduhan' %}">Downloads</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'langganan:show_langganan' %}">Kelola Langganan</a>
+            <a class="nav-link" href="{% url 'langganan:show_langganan' %}">Subscription</a>
           </li>
         {% else %}
           <li class="nav-item active">
-            <a class="nav-link" href="#">Beranda <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{% url 'tayangan:show_tayangan' %}">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'tayangan:show_trailer' %}">Trailer</a>
+            <a class="nav-link" href="{% url 'tayangan:show_trailer' %}">Watch Trailer</a>
           </li>
         {% endif %}
       </ul>
       <div class="navbar-nav ml-auto">
         {% if request.COOKIES.is_authenticated %}
-          <a class="btn btn-light" type="button" href="{% url 'authentication:logout' %}">Logout</a>
+          <a class="btn btn-secondary" type="button" href="{% url 'authentication:logout' %}">Logout</a>
         {% else %}
           <a class="btn btn-dark mr-2" type="button" href="{% url 'authentication:login' %}">Login</a>
           <a class="btn btn-secondary" type="button" href="{% url 'authentication:register' %}">Register</a>

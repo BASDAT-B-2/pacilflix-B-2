@@ -17,7 +17,7 @@ def daftar_favorit(request):
         'status': 'success',
         'records_daftar_favorit': records_daftar_favorit,
     }
-    response = render(request, 'show_favorit.html', context)
+    response = render(request, 'DaftarFavorit.html', context)
     return response
 
 def tayangan_favorit(request):
@@ -38,7 +38,7 @@ def tayangan_favorit(request):
             'records_tayangan_favorit': records_tayangan_favorit,
             'time': timestamp
         }
-    response = render(request, 'tayangan_favorit.html', context)
+    response = render(request, 'TayanganFavorit.html', context)
     return response
 
 def hapus_daftar(request):
