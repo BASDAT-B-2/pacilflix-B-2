@@ -69,10 +69,10 @@
   <!-- Informasi Film -->
   <div class="film-info">
     <h2>Judul: {{ film_tinfo.1 }}<span id="judul-film"></span></h2>
-    <button class="btn btn-tonton" >Tonton</button>
+    <button class="btn btn-tonton" href="{{ url_video_film }}">Tonton</button>
     <button class="btn btn-unduh">Unduh</button>
     <button class="btn btn-favoritkan">Favoritkan</button>
-    <p>Total View: <span id="total-view">-------</span></p>
+    <p>Total View: <span id="total-view">{{ view_info }}</span></p>
     <p>Rating Rata-Rata: <span id="rating">-------</span></p>
     <p>Sinopsis: <span id="sinopsis">{{ film_tinfo.2 }}</span></p>
     <p>Durasi Film: <span id="durasi">{{ film.3 }}</span></p>
@@ -80,28 +80,79 @@
     <p>URL Film: <a href="{{ url_video_film }}" id="url-film">{{ film.1 }}</a></p>
     <p>Genre:</p>
     <ul>
-      <li><span id="genre-1"></span></li>
+      {% for g in genre %}
+      <li><span id="genre-1">{{ g }}</span></li>
+      {% endfor %}
       <!-- Lanjutkan dengan item genre lainnya jika diperlukan -->
     </ul>
-    <p>Asal Negara: <span id="asal-negara">-------</span></p>
+    <p>Asal Negara: <span id="asal-negara">{{ film.5 }}</span></p>
     <p>Pemain:</p>
     <ul>
-      <li><span id="pemain-1"></span></li>
-      <!-- Lanjutkan dengan item pemain lainnya jika diperlukan -->
+      {% for p in actors %}
+        <li><span id="pemain-1"> {{ p }}</span></li>
+        {% endfor %}
     </ul>
     <p>Penulis Skenario:</p>
     <ul>
-      <li><span id="penulis-skenario-1"></span></li>
-      <!-- Lanjutkan dengan item penulis skenario lainnya jika diperlukan -->
+      {% for w in writers %}
+        <li><span id="penulis-skenario-1"> {{ w }} </span></li>
+      {% endfor %}
     </ul>
-    <p>Sutradara: <span id="sutradara">-------</span></p>
+    <p>Sutradara: <span id="sutradara">{{ director }}</span></p>
   </div>
 
-  <!-- Bagian Ulasan -->
-  <div class="ulasan">
-    <h2>Ulasan</h2>
-    <!-- Isi bagian ulasan di sini -->
-  </div>
+<!-- Bagian Ulasan -->
+<div class="container">
+  <h2>Ulasan</h2>
+
+  <form method="POST" >
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="username">username:</label>
+      <input type="text" class="form-control" id="username" name="username" required>
+    </div>
+    <div class="form-group">
+      <label for="deskripsi">deskripsi:</label>
+      <input type="text" class="form-control" id="deskripsi" name="deskripsi" required>
+    </div>
+    <div>
+      <label for="rating">Rating:</label>
+      <select class="form-control" id="rating" name="rating" required>
+        <option value="">Pilih Rating</option>
+        <option value=1>1</option>
+        <option value=2>2</option>
+        <option value=3>3</option>
+        <option value=4>4</option>
+        <option value=5>5</option>
+      </select>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-dark" >Submit</button> 
+    </div>
+  </form>
+
+  <!-- Daftar Ulasan -->
+  <h3>Daftar Ulasan</h3>
+  <table class="table table-bordered table-custom">
+    <thead>
+      <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Deskripsi</th>
+        <th scope="col">Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Isi tabel dengan data ulasan -->
+      {% for u in ulasan %}
+      <tr>
+        <td>{{ u.1 }}</td>
+        <td>{{ u.2 }}</td>
+        <td>{{ u.3 }}</td>          
+      </tr>
+      {% endfor %}
+    
+    </tbody>
+  </table>
 
 </div>
 
