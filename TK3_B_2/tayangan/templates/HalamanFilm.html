@@ -66,6 +66,7 @@
   <!-- Informasi Film -->
   <div class="film-info">
     <h2>Judul: {{ film_tinfo.1 }}<span id="judul-film"></span></h2>
+
 <!-- Tombol Unduh -->
 <form action="{% url 'daftar_unduhan:daftar_unduhan' %}" method="post">
   {% csrf_token %}
@@ -74,11 +75,12 @@
 </form>
 
 <!-- Tombol Favoritkan -->
-<form action="{% url 'daftar_favorit:tayangan_favorit' %}" method="post">
+<form action="{% url 'daftar_favorit:show_favorit' %}" method="post">
   {% csrf_token %}
   <input type="hidden" name="film_id" value="{{ film.id }}">
   <button type="submit" class="btn btn-favoritkan">Favorite</button>
 </form>
+
     <p>Total View: <span id="total-view">{{ view_info }}</span></p>
     <p>Rating Rata-Rata: <span id="rating">-------</span></p>
     <p>Sinopsis: <span id="sinopsis">{{ film_tinfo.2 }}</span></p>
