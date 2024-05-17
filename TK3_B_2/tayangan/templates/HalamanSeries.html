@@ -11,9 +11,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     body {
-      background-image: url('https://i.pinimg.com/564x/c1/56/3c/c1563cc3942d5081b510179102629916.jpg');
-      background-size: cover;
-      color: #ffffff;
+      background-color: #471e1e; /* Warna Hitam */
+      color: #ffffff; /* Warna Teks Putih */
     }
 
     .btn {
@@ -62,8 +61,20 @@
       <li><a href="#">{{ episode.episode_title }}</a></li>
       {% endfor %}
     </ul>
-    <button class="btn btn-unduh">Unduh</button>
-    <button class="btn btn-favoritkan">Favoritkan</button>
+        <!-- Tombol Unduh -->
+    <form action="{% url 'daftar_unduhan:daftar_unduhan' %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="series_id" value="{{series_details.id_tayangan }}">
+      <button type="submit" class="btn btn-unduh">Download</button>
+    </form>
+
+     <!-- Formulir untuk tombol favoritkan -->
+     <form action="{% url 'daftar_favorit:show_favorit' %}" method="post" style="display: inline;">
+      {% csrf_token %}
+      <input type="hidden" name="series_id" value="{{ series_details.id_tayangan }}">
+      <button type="submit" class="btn btn-favoritkan">Favoritkan</button>
+    </form>
+
     <p>Total View: <span id="total-view">{{ series_details.total_view }}</span></p>
     <p>Rating Rata-Rata: <span id="rating">{{ series_details.rating }}</span></p>
     <p>Sinopsis: <span id="sinopsis">{{ series_details.sinopsis }}</span></p>

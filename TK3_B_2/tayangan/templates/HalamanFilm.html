@@ -9,13 +9,10 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
-
     body {
-      background-image: url('https://i.pinimg.com/564x/63/54/ec/6354ecf1a07d9732b0656ffe494be085.jpg'); /* URL gambar transparan */
-      background-size: cover; /* Penyesuaian ukuran gambar */
+      background-color: #471e1e; /* Warna Hitam */
       color: #ffffff; /* Warna Teks Putih */
     }
-
 
     .btn {
       border-radius: 10px; /* Aksen lengkungan pada tombol */
@@ -69,13 +66,25 @@
   <!-- Informasi Film -->
   <div class="film-info">
     <h2>Judul: {{ film_tinfo.1 }}<span id="judul-film"></span></h2>
-    <button class="btn btn-tonton" href="{{ url_video_film }}">Tonton</button>
-    <button class="btn btn-unduh">Unduh</button>
-    <button class="btn btn-favoritkan">Favoritkan</button>
+
+<!-- Tombol Unduh -->
+<form action="{% url 'daftar_unduhan:daftar_unduhan' %}" method="post">
+  {% csrf_token %}
+  <input type="hidden" name="film_id" value="{{ film.id }}">
+  <button type="submit" class="btn btn-unduh">Download</button>
+</form>
+
+<!-- Tombol Favoritkan -->
+<form action="{% url 'daftar_favorit:show_favorit' %}" method="post">
+  {% csrf_token %}
+  <input type="hidden" name="film_id" value="{{ film.id }}">
+  <button type="submit" class="btn btn-favoritkan">Favorite</button>
+</form>
+
     <p>Total View: <span id="total-view">{{ view_info }}</span></p>
     <p>Rating Rata-Rata: <span id="rating">-------</span></p>
     <p>Sinopsis: <span id="sinopsis">{{ film_tinfo.2 }}</span></p>
-    <p>Durasi Film: <span id="durasi">{{ film.3 }}</span></p>
+    <p>Durasi Film: <span id="durasi">{{ film.3 }} menit</span></p>
     <p>Tanggal Rilis Film: <span id="tanggal-rilis">{{ film.2 }}</span></p>
     <p>URL Film: <a href="{{ url_video_film }}" id="url-film">{{ film.1 }}</a></p>
     <p>Genre:</p>
@@ -107,10 +116,7 @@
 
   <form method="POST" >
     {% csrf_token %}
-    <div class="form-group">
-      <label for="username">username:</label>
-      <input type="text" class="form-control" id="username" name="username" required>
-    </div>
+    <p>username: {{ request.COOKIES.username }} </p>
     <div class="form-group">
       <label for="deskripsi">deskripsi:</label>
       <input type="text" class="form-control" id="deskripsi" name="deskripsi" required>

@@ -128,15 +128,30 @@ def show_film(request,id):
             data_ulasan = cursor.fetchall()
             ulasan = data_ulasan
 
-            # cursor.execute('SELECT COUNT(*), AVG(rating) FROM RIWAYAT_NONTON WHERE id_tayangan = %s AND EXTRACT(EPOCH FROM (end_date_time - start_date_time)) >= (0.7 * %s * 60)', [film[0], film[3]])
-            # view_info = cursor.fetchone()
             cursor.execute('SELECT genre FROM GENRE_TAYANGAN WHERE id_tayangan = %s', (id,))
             genres = cursor.fetchall()
-            cursor.execute('SELECT p.nama FROM PEMAIN p JOIN MEMAINKAN_TAYANGAN m ON p.id = m.id_pemain WHERE m.id_tayangan = %s', (id,))
+            cursor.execute('''
+                SELECT p.nama 
+                FROM contributors p 
+                JOIN MEMAINKAN_TAYANGAN m ON p.id = m.id_pemain 
+                JOIN pemain x ON p.id = x.id 
+                WHERE m.id_tayangan = %s
+            ''', (id,))            
             actors = cursor.fetchall()
-            cursor.execute('SELECT p.nama FROM PENULIS_SKENARIO p JOIN MENULIS_SKENARIO_TAYANGAN m ON p.id = m.id_penulis_skenario WHERE m.id_tayangan = %s', (id,))
+            cursor.execute('''
+                SELECT p.nama 
+                FROM contributors p 
+                JOIN menulis_skenario_tayangan m ON p.id = m.id_penulis_skenario 
+                JOIN penulis_skenario x ON p.id = x.id 
+                WHERE m.id_tayangan = %s
+            ''', (id,))              
             writers = cursor.fetchall()
-            cursor.execute('SELECT s.nama FROM SUTRADARA s WHERE s.id = %s', [info[5]])
+            cursor.execute('''
+                SELECT p.nama 
+                FROM contributors p 
+                JOIN tayangan t on t.id_sutradara = p.id
+                WHERE t.id = %s
+            ''', (id,)) 
             director = cursor.fetchone()
 
     # hitung_tujuh = datetime.now() - timedelta(days=7)
@@ -155,9 +170,8 @@ def show_film(request,id):
         'film' : film,
         'film_tinfo' : film_tinfo,
         'ulasan' : ulasan,
-        # 'view_info': view_info,
         'genres' : genres,
-        'actors':actors,
+        'actors': actors,
         'writers':writers,
         'director':director
     }
