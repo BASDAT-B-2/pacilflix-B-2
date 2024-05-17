@@ -162,15 +162,15 @@
   <tbody>
       <!-- Isi tabel dengan data tayangan -->
 
-    {% for se in series %}
-    <tr>
-      <td>{{ se.1 }}</td>
-      <td>{{ se.2 }}</td>
-      <td><a href="{{ se.3 }}">{{ se.3 }}</a></td>
-      <td>{{ se.4 }}</td>
-      <td><button class="btn btn-primary">Detail</button></td>
-    </tr>
-    {% endfor %}
+      {% for se in series %}
+      <tr>
+        <td>{{ se.1 }}</td>
+        <td>{{ se.2 }}</td>
+        <td><a href="{{ se.3 }}">{{ se.3 }}</a></td>
+        <td>{{ se.4 }}</td>
+        <td><a class="btn btn-primary" href="{% url 'tayangan:show_series' se.0 %}">Detail</a></td>
+      </tr>
+      {% endfor %}
 
       <!-- Lanjutkan baris-baris berikutnya untuk tayangan lainnya -->
     </tbody>

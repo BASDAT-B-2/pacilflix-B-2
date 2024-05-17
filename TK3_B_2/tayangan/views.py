@@ -14,11 +14,105 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 
 # Create your views here.
-def show_series(request):
-    return render(request, "HalamanSeries.html")
+def show_series(request, series_id):
+    episodes = []
+    with connection.cursor() as cursor:
+        cursor.execute(
+            f"SELECT judul, sinopsis, asal_negara FROM TAYANGAN WHERE id = '{series_id}'"
+        )
+        series_details = cursor.fetchone()
 
-def show_episode(request):
-    return render(request, "HalamanEpisode.html")
+        if series_details:
+            cursor.execute(
+                f"SELECT genre FROM GENRE_TAYANGAN WHERE id_tayangan = '{series_id}'"
+            )
+            genres = [genre[0] for genre in cursor.fetchall()]
+
+
+            cursor.execute(
+                f"SELECT id_sutradara FROM TAYANGAN WHERE id = '{series_id}'"
+            )
+            director_id = cursor.fetchone()[0] if cursor.rowcount > 0 else None
+
+            director = None
+            if director_id:
+                cursor.execute(
+                    f"SELECT nama FROM CONTRIBUTORS WHERE id = '{director_id}'"
+                )
+                director = cursor.fetchone()[0]
+
+            cursor.execute(
+                f"SELECT id_pemain FROM MEMAINKAN_TAYANGAN WHERE id_tayangan = '{series_id}'"
+            )
+            pemain_ids = cursor.fetchall()
+
+            pemain_names = []
+            for pemain_id in pemain_ids:
+                cursor.execute(
+                    f"SELECT nama FROM CONTRIBUTORS WHERE id = '{pemain_id[0]}'"
+                )
+                pemain_name = cursor.fetchone()
+                if pemain_name:
+                    pemain_names.append(pemain_name[0])
+
+            pemain = pemain_names if pemain_names else None
+
+            cursor.execute(
+                f"SELECT id_penulis_skenario FROM MENULIS_SKENARIO_TAYANGAN WHERE id_tayangan = '{series_id}'"
+            )
+            penulis_ids = cursor.fetchall()
+
+            penulis_names = []
+            for penulis_id in penulis_ids:
+                cursor.execute(
+                    f"SELECT nama FROM CONTRIBUTORS WHERE id = '{penulis_id[0]}'"
+                )
+                penulis_name = cursor.fetchone()
+                if penulis_name:
+                    penulis_names.append(penulis_name[0])
+
+            penulis = penulis_names if penulis_names else None
+
+            cursor.execute(f"SELECT * FROM EPISODE WHERE id_series = '{series_id}'")
+            episodes = cursor.fetchall()
+            episodes_with_index = [(i, *episode) for i, episode in enumerate(episodes)]
+
+            series_details = {
+                'judul': series_details[0],
+                'sinopsis': series_details[1],
+                'asal_negara': series_details[2],
+                'genres': genres,
+                'sutradara': director,
+                'pemain' : pemain,
+                'penulis' : penulis,
+                'id_tayangan' : series_id,
+                'episodes' : episodes_with_index,
+            }
+
+    return render(request, 'HalamanSeries.html', {'series_details': series_details})
+
+
+def show_episode(request, series_id, episode_number):
+    episode_number = int(episode_number)
+    with connection.cursor() as cursor:
+        cursor.execute(f"SELECT judul FROM TAYANGAN WHERE id = '{series_id}'")
+        series_title = cursor.fetchone()
+
+        cursor.execute(f"SELECT * FROM EPISODE WHERE id_series = '{series_id}'")
+        episodes = cursor.fetchall()
+        episodes_with_index = [(i, *episode) for i, episode in enumerate(episodes)]
+
+        if 0 <= episode_number < len(episodes):
+            episode = episodes[episode_number]
+        else:
+            episode = None
+
+    context = {
+        'episodes' : episodes_with_index,
+        'episode': episode,
+        'series_title': series_title[0] if series_title else None,  # Ensure series_title is not None before accessing the title
+    }
+    return render(request, 'HalamanEpisode.html', context)
 
 def show_film(request,id):
     film = []
@@ -155,3 +249,10 @@ def ulasan(request, id):
             return render(request, "HalamanFilm.html", {'error': str(e)})
 
     return HttpResponse(status=405)
+
+def series_detail(request, series_id):
+    series = show_series.objects.get(id=series_id)
+    context = {
+        'series': series,
+    }
+    return render(request, 'HalamanSeries.html', context)

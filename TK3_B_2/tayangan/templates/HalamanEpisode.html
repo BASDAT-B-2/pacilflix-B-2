@@ -1,83 +1,79 @@
 {% extends 'base.html' %}
-{% block content %}
 
+{% block content %}
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Halaman Episode - PacilFlix</title>
+  <title>Halaman Series - PacilFlix</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     body {
-      background-image: url('https://i.pinimg.com/564x/c1/56/3c/c1563cc3942d5081b510179102629916.jpg'); /* URL gambar transparan */
-      background-size: cover; /* Penyesuaian ukuran gambar */
-      color: #ffffff; /* Warna Teks Putih */
+      background-image: url('https://i.pinimg.com/564x/c1/56/3c/c1563cc3942d5081b510179102629916.jpg');
+      background-size: cover;
+      color: #ffffff;
     }
 
     .btn {
-      border-radius: 10px; /* Aksen lengkungan pada tombol */
-      margin-right: 10px; /* Spasi kanan */
+      border-radius: 10px;
+      margin-right: 10px;
     }
 
-    /* Gaya tambahan untuk judul */
-    .judul {
-      margin-top: 30px; /* Spasi atas */
-      margin-bottom: 20px; /* Spasi bawah */
-      font-weight: bold; /* Teks tebal */
-      font-size: 36px; /* Ukuran teks besar */
-    }
-
-    /* Gaya tambahan untuk informasi episode */
-    .episode-info {
-      margin-bottom: 20px; /* Spasi bawah */
-      font-weight: bold; /* Teks tebal */
-      font-size: 20px; /* Ukuran teks besar */
-    }
-
-    /* Gaya tambahan untuk bagian ulasan */
-    .ulasan {
-      margin-top: 30px; /* Spasi atas */
-      font-size: 24px; /* Ukuran teks besar */
-    }
-
-    /* Gaya tombol tonton */
     .btn-tonton {
-      background-color: #000000; /* Hitam */
-      border-color: #000000; /* Hitam */
-      color: #ffffff;
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .judul {
+      margin-top: 30px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .series-info {
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .episode-info {
+      margin-bottom: 20px;
+      color: white;
+    }
+
+    .episode-info h3 {
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
 
 <div class="container mt-4">
-  <h1 class="mb-4 judul">Halaman Episode</h1>
+  <h1 class="mb-4 judul">HALAMAN EPISODE</h1>
+
   <!-- Informasi Episode -->
   <div class="episode-info">
-    <h2>Judul: <span id="judul-episode">-------</span></h2>
-    <h3>Sub Judul: <span id="sub-judul">-------</span></h3>
+    <h3>Judul: <span id="judul-episode">{{ episode.judul }}</span></h3>
+    <h3>Sub Judul: <span id="sub-judul-episode">{{ episode.sub_judul }}</span></h3>
+    <hr>
     <button class="btn btn-tonton">Tonton</button>
-    <p>Episode Lainnya:</p>
+    <hr>
+    <h3>Episode Lainnya:</h3>
     <ul>
-      <li><a href="#" id="link-episode-1">Episode 1</a></li>
-      <li><a href="#" id="link-episode-1">Episode 2</a></li>
-      <li><a href="#" id="link-episode-1">Episode 3</a></li>
-      <!-- Lanjutkan dengan link episode lainnya jika diperlukan -->
+      {% for ep in episodes %}
+        <li><a href="{{ ep.url }}">{{ ep.nomor }}</a></li>
+      {% endfor %}
     </ul>
-    <p>Sinopsis Episode: <span id="sinopsis-episode">-------</span></p>
-    <p>Durasi Episode: <span id="durasi-episode">-------</span></p>
-    <p>URL Episode: <a href="#" id="url-episode">www.example.com</a></p>
-    <p>Tanggal Rilis Episode: <span id="tanggal-rilis-episode">-------</span></p>
+    <h3>Sinopsis Episode:</h3>
+    <p>{{ episode.sinopsis }}</p>
+    <h3>Durasi Episode:</h3>
+    <p>{{ episode.durasi }}</p>
+    <h3>URL Episode:</h3>
+    <p>{{ episode.url }}</p>
+    <h3>Tanggal Rilis Episode:</h3>
+    <p>{{ episode.tanggal_rilis }}</p>
   </div>
-
-  <!-- Bagian Ulasan -->
-  <div class="ulasan">
-    <h2>Ulasan</h2>
-    <!-- Isi bagian ulasan di sini -->
-  </div>
-
 </div>
 
 <!-- Bootstrap JS (diperlukan jQuery) -->

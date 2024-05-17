@@ -5,5 +5,5 @@ app_name = 'langganan'
 
 urlpatterns = [
     path('', show_langganan, name='show_langganan'),
-    path('pembayaran/', pembayaran, name='pembayaran'),
+    path('pembayaran/<str:package>/', proses_pembayaran, name='pembayaran'),
 ]

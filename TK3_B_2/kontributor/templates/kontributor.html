@@ -96,23 +96,24 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
     
-    <h1 class="center-content">List of Contributors</h1>
+    <h1 class="center-content" style="font-weight: bold;">List of Contributors</h1>
     <br>
     <div class="center-content">
         <h3 style="display: inline-block;">Filter</h3>
         <div class="dropdown" style="display: inline-block;">
-            <button class="dropbtn">View All 
-              <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-content">
-              <a href="#">Actor</a>
-              <a href="#">Director</a>
-              <a href="#">Writer</a>
-            </div>
+            <select id="filter">
+                <option value="All">View All</option>
+                <option value="Aktor">Aktor</option>
+                <option value="Sutradara">Sutradara</option>
+                <option value="Penulis">Penulis</option>
+            </select>
           </div>
         <table class="content-table">
             <thead>
@@ -124,27 +125,44 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Cady Heron</td>
-                    <td>Actor</td>
-                    <td>Female</td>
-                    <td>South African</td>
+                {% for c in daftar_kontributor %}
+                <tr class="contributor" >
+                    <td style="font-weight: bold;">{{ c.0 }}</td>
+                    <td>{% if c.3 %}
+                        {% for peran in c.3 %}
+                            {{ peran }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %} {% endif %}</td>
+                    <td>{% if c.1 == 0 %} Male 
+                        {% elif c.1 == 1 %} Female
+                        {% endif %}
+                    </td>
+                    <td>{{ c.2 }}</td>
                 </tr>
-                <tr class="active-row">
-                    <td>Aaron Samuel</td>
-                    <td>Director</td>
-                    <td>Male</td>
-                    <td>Italian</td>
-                </tr>
-                <tr>
-                    <td>Regina George</td>
-                    <td>Actor, Writer</td>
-                    <td>Female</td>
-                    <td>Canadian</td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
+    <script>
+        document.getElementById('filter').addEventListener('change', function() {
+            var selectedType = this.value;
+            var contributors = document.querySelectorAll('.contributor');
+            
+            if (selectedType === 'All') {
+                contributors.forEach(function(contributor) {
+                    contributor.classList.remove('hidden');
+                });
+            } else {
+                contributors.forEach(function(contributor) {
+                    var roles = contributor.classList;
+                    if (!roles.contains(selectedType)) {
+                        contributor.classList.add('hidden');
+                    } else {
+                        contributor.classList.remove('hidden');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 {% endblock content %}
 

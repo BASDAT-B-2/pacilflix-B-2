@@ -712,3 +712,59 @@ INSERT INTO tayangan_terunduh VALUES ('164c4142-3163-4e85-8b36-36b2b2e9c31c','co
 	('164c4142-3163-4e85-8b36-36b2b2e9c31c','coolcat123','2024-07-31 08:55:00'),
 	('164c4142-3163-4e85-8b36-36b2b2e9c31c','skywalker87','2024-07-13 09:20:00');
 
+INSERT INTO sutradara VALUES ('92d34712-2a21-4ab2-aeef-faad164c51f0'),
+	('f85bb23a-b4c8-4ccf-a3dc-4a8207518b46'),
+	('8b3e7ae2-ba69-4f36-9ad0-4f4b25574921'),
+	('36c4b9e7-bb13-4752-a684-9e49d9f190dc'),
+	('b2a4eddb-45f0-48b5-a731-13e58c949e10'),
+	('0c3ed079-e5e1-4a21-8b24-57f2febb5c86'), ('e7f4f12c-249b-4cd4-bb7c-5ae8245a99a0');
+
+
+
+INSERT INTO pemain VALUES ('c76eddd2-559b-4b3c-b129-3e394198a4cc'),
+	('f85bb23a-b4c8-4ccf-a3dc-4a8207518b46'),
+	('a92c9a89-6c8b-4155-a2d5-bf6d8b87654c'),
+	('f5a054df-5a7e-4d38-a7db-94882f022b4a'),
+	('36c4b9e7-bb13-4752-a684-9e49d9f190dc'),
+	('3d650f12-f305-4bfb-af16-498c8968d962'),
+	('b2bdf9c5-8a6d-47f0-9d68-b31d2d31eabf'),
+	('d05ec2fb-3983-48a0-bb0e-5b301e19c16c'),
+	('19e8bbdc-8c18-4967-93da-dbea1d8313e1');
+
+
+
+
+INSERT INTO penulis_skenario VALUES ('92d34712-2a21-4ab2-aeef-faad164c51f0'),
+	('c76eddd2-559b-4b3c-b129-3e394198a4cc'),
+	('a92c9a89-6c8b-4155-a2d5-bf6d8b87654c'),
+	('9fc0c3d3-72d6-4e82-b454-36ee83f9e0f0'),
+	('896b631b-fac9-4a82-a2f8-22cf95126a60'),
+	('b2a4eddb-45f0-48b5-a731-13e58c949e10');
+
+
+
+INSERT INTO sutradara VALUES ('92d34712-2a21-4ab2-aeef-faad164c51f0','Emily Brown',1,'United Kingdom'),
+	('f85bb23a-b4c8-4ccf-a3dc-4a8207518b46','Sarah Kim',1,'South Korea'),
+	('8b3e7ae2-ba69-4f36-9ad0-4f4b25574921','Ashley Perez',1,'Brazil'),
+	('36c4b9e7-bb13-4752-a684-9e49d9f190dc','Mia Collins',1,'Netherlands'),
+	('b2a4eddb-45f0-48b5-a731-13e58c949e10','Mason Wright',0,'Pakistan'),
+	('0c3ed079-e5e1-4a21-8b24-57f2febb5c86','Jackson Murphy',0,'Philippines'),
+	('e7f4f12c-249b-4cd4-bb7c-5ae8245a99a0','Jessica Martinez',1,'Spain');
+
+INSERT INTO pemain VALUES ('c76eddd2-559b-4b3c-b129-3e394198a4cc','David Lee',0,'Japan'),
+	('f85bb23a-b4c8-4ccf-a3dc-4a8207518b46','Sarah Kim',1,'South Korea'),
+	('a92c9a89-6c8b-4155-a2d5-bf6d8b87654c','Amanda Nguyen',1,'Vietnam'),
+	('f5a054df-5a7e-4d38-a7db-94882f022b4a','Matthew Garcia',0,'Mexico'),
+	('36c4b9e7-bb13-4752-a684-9e49d9f190dc','Mia Collins',1,'Netherlands'),
+	('3d650f12-f305-4bfb-af16-498c8968d962','Lily Murphy',1,'Denmark'),
+	('b2bdf9c5-8a6d-47f0-9d68-b31d2d31eabf','Alexander Kelly',0,'Ireland'),
+	('d05ec2fb-3983-48a0-bb0e-5b301e19c16c','Harper Hayes',1,'Malaysia'),
+	('19e8bbdc-8c18-4967-93da-dbea1d8313e1','Ethan King',0,'Thailand');
+
+INSERT INTO penulis_skenario VALUES ('92d34712-2a21-4ab2-aeef-faad164c51f0','Emily Brown',1,'United Kingdom'),
+	('c76eddd2-559b-4b3c-b129-3e394198a4cc','David Lee',0,'Japan'),
+	('a92c9a89-6c8b-4155-a2d5-bf6d8b87654c','Amanda Nguyen',1,'Vietnam'),
+	('9fc0c3d3-72d6-4e82-b454-36ee83f9e0f0','Samantha Lopez',1,'Chile'),
+	('896b631b-fac9-4a82-a2f8-22cf95126a60','Noah Woods',0,'South Africa'),
+	('b2a4eddb-45f0-48b5-a731-13e58c949e10','Mason Wright',0,'Pakistan');
+
