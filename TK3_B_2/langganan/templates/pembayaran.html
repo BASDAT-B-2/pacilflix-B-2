@@ -114,7 +114,6 @@
     <h1 class="center-content">Confirm Payment</h1>
     <br>
     <div class="center-content">
-
         <table class="content-table">
             <thead>
                 <tr>
@@ -126,26 +125,67 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Bronze</td>
-                    <td>Rp 79.000</td>
-                    <td>720</td>
-                    <td>Smartphone</td>
+                    <th><p>{{ package }}</p></th>
+                    <th>{% if package == 'gold' %}
+                        <p>Rp 355.999</p>
+                    {% elif package == 'silver' %}
+                        <p>Rp 159.999</p>
+                    {% elif package == 'bronze' %}
+                        <p>Rp 79.999</p>
+                    {% endif %}</th>
+                    <th>{% if package == 'gold' %}
+                        <p>4k</p>
+                    {% elif package == 'silver' %}
+                        <p>1080</p>
+                    {% elif package == 'bronze' %}
+                        <p>720</p>
+                    {% endif %}</th>
+                    <th>{% if package == 'gold' %}
+                        <p>Smartphone, Ipad, Laptop, and TV</p>
+                    {% elif package == 'silver' %}
+                        <p>Smartphone and Ipad</p>
+                    {% elif package == 'bronze' %}
+                        <p>Smartphone</p>{% endif %}</th>                
                 </tr>
             </tbody>
         </table>
         <h3 style="display: inline-block;">Choose payment method</h3>
         <div class="dropdown" style="display: inline-block;">
-            <button class="dropbtn">Choose One 
-              <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-content">
-              <a href="#">Credit Card</a>
-              <a href="#">Paypal</a>
-              <a href="#">GoPay</a>
-            </div>
-          </div>
+            <select id="payment-method">
+                <option value="Credit Card">Credit Card</option>
+                <option value="Paypal">Paypal</option>
+                <option value="GoPay">GoPay</option>
+                <option value="DANA">DANA</option>
+                <option value="Bank Transfer">Bank Transfer</option>
+            </select>
+        </div>
     </div>
-    <a class="btn" href="#">Confirm</a>
-
+    <button id="confirm-btn" class="btn" type="button">Confirm</button>
 </body>
+<script>
+    document.getElementById('confirm-btn').addEventListener('click', function(event) {
+        event.preventDefault();
+        
+        var package = "{{ package }}";
+        var paymentMethod = document.getElementById('payment-method').value;
+        
+        fetch("{% url 'langganan:pembayaran' package %}", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({package: package, paymentMethod: paymentMethod})
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert("Payment successful");
+                window.location.href = "{% url 'tayangan:show_tayangan' %}";
+            } else {
+                alert("Payment failed");
+            }
+        });
+    });
+</script>
 </html>
