@@ -17,7 +17,7 @@ def daftar_favorit(request):
         'status': 'success',
         'records_daftar_favorit': records_daftar_favorit,
     }
-    response = render(request, 'daftar_favorit.html', context)
+    response = render(request, 'show_favorit.html', context)
     return response
 
 def tayangan_favorit(request):
@@ -52,7 +52,7 @@ def hapus_daftar(request):
         cursor.execute(
             f'DELETE FROM TAYANGAN_MEMILIKI_DAFTAR_FAVORIT WHERE username = \'{username}\' AND timestamp = \'{timestamp}\'')
     connection.commit()
-    return redirect('daftar_favorit:daftar_favorit')
+    return redirect('show_favorit:show_favorit')
 
 def hapus_tayangan_favorit(request):
     username = request.COOKIES.get('username')
@@ -64,5 +64,5 @@ def hapus_tayangan_favorit(request):
             f'DELETE FROM TAYANGAN_MEMILIKI_DAFTAR_FAVORIT WHERE username = \'{username}\' AND timestamp = \'{timestamp}\' \
                 AND id_tayangan = \'{id_tayangan}\'')
     connection.commit()
-    redirect_url = reverse('daftar_favorit:tayangan_favorit') + '?timestamp=' + timestamp
+    redirect_url = reverse('show_favorit:tayangan_favorit') + '?timestamp=' + timestamp
     return HttpResponseRedirect(redirect_url)
