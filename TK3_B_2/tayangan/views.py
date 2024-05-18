@@ -129,15 +129,24 @@ def show_film(request,id):
             ulasan = data_ulasan
 
             cursor.execute('SELECT genre FROM GENRE_TAYANGAN WHERE id_tayangan = %s', (id,))
-            genres = cursor.fetchall()
-            cursor.execute('''
-                SELECT p.nama 
-                FROM contributors p 
-                JOIN MEMAINKAN_TAYANGAN m ON p.id = m.id_pemain 
-                JOIN pemain x ON p.id = x.id 
-                WHERE m.id_tayangan = %s
-            ''', (id,))            
-            actors = cursor.fetchall()
+            genre = cursor.fetchall()
+            genres = genre
+
+            cursor.execute(
+                f"SELECT id_pemain FROM MEMAINKAN_TAYANGAN WHERE id_tayangan =  %s", (id,))
+            pemain_ids = cursor.fetchall()
+
+            pemain_names = []
+            for pemain_id in pemain_ids:
+                cursor.execute(
+                    f"SELECT nama FROM CONTRIBUTORS WHERE id = '{pemain_id[0]}'"
+                )
+                pemain_name = cursor.fetchone()
+                if pemain_name:
+                    pemain_names.append(pemain_name[0])
+
+            actors = pemain_names if pemain_names else None
+
             cursor.execute('''
                 SELECT p.nama 
                 FROM contributors p 
@@ -260,7 +269,6 @@ def show_trailer(request):
 
     return render(request, "trailer.html", context)
 
-@csrf_exempt
 def ulasan(request, id):
     if request.method == "POST":
         username = request.POST.get("username")
