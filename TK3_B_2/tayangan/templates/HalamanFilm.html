@@ -9,13 +9,10 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
-
     body {
-      background-image: url('https://i.pinimg.com/564x/63/54/ec/6354ecf1a07d9732b0656ffe494be085.jpg'); /* URL gambar transparan */
-      background-size: cover; /* Penyesuaian ukuran gambar */
+      background-color: #471e1e; /* Warna Hitam */
       color: #ffffff; /* Warna Teks Putih */
     }
-
 
     .btn {
       border-radius: 10px; /* Aksen lengkungan pada tombol */
@@ -60,36 +57,18 @@
       margin-top: 30px; /* Spasi atas */
     }
 
-    /* Gaya tambahan untuk tabel */
-    .table-custom {
-      border-radius: 20px; /* Aksen lengkungan */
-      overflow: hidden; /* Menghilangkan sisi lengkungan yang terpotong */
-      background-color: #4e4e4e; /* Warna latar belakang */
+    .progress {
+      height: 20px;
+      background-color: #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 20px;
     }
 
-    /* Gaya tambahan untuk header tabel */
-    .table-custom thead {
-      background-color: #2c2c2c; /* Warna latar belakang header */
-      color: #ffffff;
-
+    .progress-bar {
+      height: 100%;
+      background-color: #007bff;
     }
-
-    /* Gaya tambahan untuk teks di header tabel */
-    .table-custom th {
-      border: none; /* Hapus border di header */
-    }
-
-    /* Gaya tambahan untuk baris tabel */
-    .table-custom tbody tr {
-      background-color: #363636; /* Warna latar belakang baris */
-      color: #ffffff;
-    }
-
-    /* Gaya tambahan untuk tombol pada tabel */
-    .table-custom .btn {
-      border-radius: 10px; /* Aksen lengkungan pada tombol */
-    }
-
 
   </style>
 </head>
@@ -101,89 +80,116 @@
   <!-- Informasi Film -->
   <div class="film-info">
     <h2>Judul: {{ film_tinfo.1 }}<span id="judul-film"></span></h2>
-    <button class="btn btn-tonton" >Tonton</button>
-    <button class="btn btn-unduh">Unduh</button>
-    <button class="btn btn-favoritkan">Favoritkan</button>
-    <p>Total View: <span id="total-view">{{ totalview }}</span></p>
+
+     <!-- Progress Bar -->
+    <div class="d-flex align-items-start">
+      <button id="btn-tonton" class="btn btn-triangle mr-3" style="font-size: 40px; color: white;">&#9658;</button>
+      <div class="progress flex-grow-1">
+        <div class="progress-bar bg-secondary" id="progress-bar" role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar bg-primary" id="progress-bar-fill" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>      
+    
+    <!-- Tombol Tonton -->
+    <a href="{{ url_video_film }}" class="btn btn-tonton" target="_blank">Tonton</a>
+
+
+<!-- Tombol Unduh -->
+<form action="{% url 'daftar_unduhan:daftar_unduhan' %}" method="post">
+  {% csrf_token %}
+  <input type="hidden" name="film_id" value="{{ film.id }}">
+  <button type="submit" class="btn btn-unduh">Download</button>
+</form>
+
+<!-- Tombol Favoritkan -->
+<form action="{% url 'daftar_favorit:show_favorit' %}" method="post">
+  {% csrf_token %}
+  <input type="hidden" name="film_id" value="{{ film.id }}">
+  <button type="submit" class="btn btn-favoritkan">Favorite</button>
+</form>
+
+    <p>Total View: <span id="total-view">{{ view_info }}</span></p>
     <p>Rating Rata-Rata: <span id="rating">-------</span></p>
     <p>Sinopsis: <span id="sinopsis">{{ film_tinfo.2 }}</span></p>
     <p>Durasi Film: <span id="durasi">{{ film.3 }} menit</span></p>
     <p>Tanggal Rilis Film: <span id="tanggal-rilis">{{ film.2 }}</span></p>
     <p>URL Film: <a href="{{ url_video_film }}" id="url-film">{{ film.1 }}</a></p>
-
     <p>Genre:</p>
     <ul>
-      <li><span id="genre-1"></span></li>
-    </ul>   
-    <p>Asal Negara: {{ film_tinfo.5 }}<span id="asal-negara"></span></p>
-    
+      {% for g in genres %}
+      <li><span id="genre-1">{{ g }}</span></li>
+      {% endfor %}
+      <!-- Lanjutkan dengan item genre lainnya jika diperlukan -->
+    </ul>
+    <p>Asal Negara: <span id="asal-negara">{{ film_tinfo.5 }}</span></p>
     <p>Pemain:</p>
     <ul>
-      <li><span id="pemain-1"></span></li>
+      {% for p in actors %}
+        <li><span id="pemain-1"> {{ p }}</span></li>
+        {% endfor %}
     </ul>
     <p>Penulis Skenario:</p>
     <ul>
-      <li><span id="penulis-skenario-1"></span></li>
+      {% for w in writers %}
+        <li><span id="penulis-skenario-1"> {{ w }} </span></li>
+      {% endfor %}
     </ul>
-    <p>Sutradara: <span id="sutradara">-------</span></p>
+    <p>Sutradara: <span id="sutradara">{{ director }}</span></p>
   </div>
 
-  <!-- Bagian Ulasan -->
-  <div class="container">
-    <h2>Ulasan</h2>
+<!-- Bagian Ulasan -->
+<div class="container">
+  <h2>Ulasan</h2>
 
-    <form method="POST" >
-      {% csrf_token %}
-      <div class="form-group">
-        <label for="username">username:</label>
-        <input type="text" class="form-control" id="username" name="username" required>
-      </div>
-      <div class="form-group">
-        <label for="deskripsi">deskripsi:</label>
-        <input type="text" class="form-control" id="deskripsi" name="deskripsi" required>
-      </div>
-      <div>
-        <label for="rating">Rating:</label>
-        <select class="form-control" id="rating" name="rating" required>
-          <option value="">Pilih Rating</option>
-          <option value=1>1</option>
-          <option value=2>2</option>
-          <option value=3>3</option>
-          <option value=4>4</option>
-          <option value=5>5</option>
-        </select>
-      </div>
-      <div>
-        <button type="submit" class="btn btn-dark" >Submit</button> 
-      </div>
-    </form>
+  <form id="myForm" action="{% url 'tayangan:ulasan' film_tinfo.0 %}" method="POST">
+    {% csrf_token %}
+    <p for="username" type="text" id="username" name="username">username: {{ request.COOKIES.username }} </p>
+    <div class="form-group">
+      <label for="username">username:</label>
+      <input type="text" class="form-control" id="username" name="username" required>
+    </div>
+    <div class="form-group">
+      <label for="deskripsi">deskripsi:</label>
+      <input type="text" class="form-control" id="deskripsi" name="deskripsi" required>
+    </div>
+    <div>
+      <label for="rating">Rating:</label>
+      <select class="form-control" id="rating" name="rating" required>
+        <option value="">Pilih Rating</option>
+        <option value=1>1</option>
+        <option value=2>2</option>
+        <option value=3>3</option>
+        <option value=4>4</option>
+        <option value=5>5</option>
+      </select>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-dark">Submit</button>
+    </div>
+  </form>
 
-    <!-- Daftar Ulasan -->
-    <h3>Daftar Ulasan</h3>
-    <table class="table table-bordered table-custom">
-      <thead>
-        <tr>
-          <th scope="col">Username</th>
-          <th scope="col">Deskripsi</th>
-          <th scope="col">Rating</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Isi tabel dengan data ulasan -->
-        {% for u in ulasan %}
-        <tr>
-          <td>{{ u.1 }}</td>
-          <td>{{ u.2 }}</td>
-          <td>{{ u.3 }}</td>          
-        </tr>
-        {% endfor %}
-      
-      </tbody>
-    </table>
-
-  </div>
-
-
+  <!-- Daftar Ulasan -->
+  <h3>Daftar Ulasan</h3>
+  <table class="table table-bordered table-custom">
+    <thead>
+      <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Deskripsi</th>
+        <th scope="col">Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Isi tabel dengan data ulasan -->
+      {% for u in ulasan %}
+      <tr>
+        <td>{{ u.1 }}</td>
+        <td>{{ u.2 }}</td>
+        <td>{{ u.3 }}</td>          
+      </tr>
+      {% endfor %}
+    
+    </tbody>
+  </table>
 
 </div>
 
@@ -191,6 +197,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Script JavaScript -->
+<script>
+  function submitFormAndNavigate() {
+      // Kirim formulir
+      document.getElementById('myForm').submit();
+  
+      // Tunggu sebentar untuk memastikan pengiriman formulir
+      setTimeout(function() {
+          // Arahkan ke URL yang diinginkan
+          window.location.href = "{% url 'tayangan:ulasan' film_tinfo.0 %}";
+      }, 1000);  // Sesuaikan waktu tunggu sesuai kebutuhan
+  }
+  </script>
+  
 
 </body>
 {% endblock content %}

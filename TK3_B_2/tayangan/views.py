@@ -2,16 +2,14 @@ from django.shortcuts import render, redirect
 from django.db import connection
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from datetime import datetime, timedelta
+from datetime import datetime
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages  
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect
+from datetime import datetime, timedelta
 
 # Create your views here.
 def show_series(request, series_id):
@@ -130,6 +128,41 @@ def show_film(request,id):
             data_ulasan = cursor.fetchall()
             ulasan = data_ulasan
 
+            cursor.execute('SELECT genre FROM GENRE_TAYANGAN WHERE id_tayangan = %s', (id,))
+            genre = cursor.fetchall()
+            genres = genre
+
+            cursor.execute(
+                f"SELECT id_pemain FROM MEMAINKAN_TAYANGAN WHERE id_tayangan =  %s", (id,))
+            pemain_ids = cursor.fetchall()
+
+            pemain_names = []
+            for pemain_id in pemain_ids:
+                cursor.execute(
+                    f"SELECT nama FROM CONTRIBUTORS WHERE id = '{pemain_id[0]}'"
+                )
+                pemain_name = cursor.fetchone()
+                if pemain_name:
+                    pemain_names.append(pemain_name[0])
+
+            actors = pemain_names if pemain_names else None
+
+            cursor.execute('''
+                SELECT p.nama 
+                FROM contributors p 
+                JOIN menulis_skenario_tayangan m ON p.id = m.id_penulis_skenario 
+                JOIN penulis_skenario x ON p.id = x.id 
+                WHERE m.id_tayangan = %s
+            ''', (id,))              
+            writers = cursor.fetchall()
+            cursor.execute('''
+                SELECT p.nama 
+                FROM contributors p 
+                JOIN tayangan t on t.id_sutradara = p.id
+                WHERE t.id = %s
+            ''', (id,)) 
+            director = cursor.fetchone()
+
     # hitung_tujuh = datetime.now() - timedelta(days=7)
     
     # with connection.cursor() as cursor:
@@ -146,7 +179,10 @@ def show_film(request,id):
         'film' : film,
         'film_tinfo' : film_tinfo,
         'ulasan' : ulasan,
-        # 'totalview' : totalview
+        'genres' : genres,
+        'actors': actors,
+        'writers':writers,
+        'director':director
     }
     return render(request, "HalamanFilm.html", context)
 
@@ -233,7 +269,6 @@ def show_trailer(request):
 
     return render(request, "trailer.html", context)
 
-@csrf_exempt
 def ulasan(request, id):
     if request.method == "POST":
         username = request.POST.get("username")
@@ -249,10 +284,3 @@ def ulasan(request, id):
             return render(request, "HalamanFilm.html", {'error': str(e)})
 
     return HttpResponse(status=405)
-
-def series_detail(request, series_id):
-    series = show_series.objects.get(id=series_id)
-    context = {
-        'series': series,
-    }
-    return render(request, 'HalamanSeries.html', context)
