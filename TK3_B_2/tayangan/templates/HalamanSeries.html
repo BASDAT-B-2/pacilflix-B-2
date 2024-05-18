@@ -111,26 +111,27 @@
   <!-- Bagian Ulasan -->
   <div class="container">
     <h2>Ulasan</h2>
-
-    <form method="POST">
+  
+    <form id="myForm" action="{% url 'tayangan:ulasan' id_tayangan %}" method="POST">
       {% csrf_token %}
+      <p for="username" type="text" id="username" name="username">username: {{ request.COOKIES.username }} </p>
       <div class="form-group">
-        <label for="username">Username:</label>
+        <label for="username">username:</label>
         <input type="text" class="form-control" id="username" name="username" required>
       </div>
       <div class="form-group">
-        <label for="deskripsi">Deskripsi:</label>
+        <label for="deskripsi">deskripsi:</label>
         <input type="text" class="form-control" id="deskripsi" name="deskripsi" required>
       </div>
       <div>
         <label for="rating">Rating:</label>
         <select class="form-control" id="rating" name="rating" required>
           <option value="">Pilih Rating</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
+          <option value=1>1</option>
+          <option value=2>2</option>
+          <option value=3>3</option>
+          <option value=4>4</option>
+          <option value=5>5</option>
         </select>
       </div>
       <div>
@@ -138,7 +139,6 @@
       </div>
     </form>
 
-    <!-- Daftar Ulasan -->
     <h3>Daftar Ulasan</h3>
     <table class="table table-bordered table-custom">
       <thead>
@@ -150,13 +150,14 @@
       </thead>
       <tbody>
         <!-- Isi tabel dengan data ulasan -->
-        {% for ulasan in series_details.ulasan %}
+        {% for u in ulasan %}
         <tr>
-          <td>{{ ulasan.username }}</td>
-          <td>{{ ulasan.deskripsi }}</td>
-          <td>{{ ulasan.rating }}</td>          
+          <td>{{ u.1 }}</td>
+          <td>{{ u.2 }}</td>
+          <td>{{ u.3 }}</td>          
         </tr>
         {% endfor %}
+      
       </tbody>
     </table>
 
@@ -167,6 +168,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<!-- Script JavaScript -->
+<script>
+  function submitFormAndNavigate() {
+      // Kirim formulir
+      document.getElementById('myForm').submit();
+  
+      // Tunggu sebentar untuk memastikan pengiriman formulir
+      setTimeout(function() {
+          // Arahkan ke URL yang diinginkan
+          window.location.href = "{% url 'tayangan:ulasan' id_tayangan %}";
+      }, 1000);  // Sesuaikan waktu tunggu sesuai kebutuhan
+  }
+  </script>
 </body>
 {% endblock content %}

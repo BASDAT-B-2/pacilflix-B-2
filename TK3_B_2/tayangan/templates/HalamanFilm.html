@@ -116,12 +116,12 @@
     <p>URL Film: <a href="{{ url_video_film }}" id="url-film">{{ film.1 }}</a></p>
     <p>Genre:</p>
     <ul>
-      {% for g in genre %}
+      {% for g in genres %}
       <li><span id="genre-1">{{ g }}</span></li>
       {% endfor %}
       <!-- Lanjutkan dengan item genre lainnya jika diperlukan -->
     </ul>
-    <p>Asal Negara: <span id="asal-negara">{{ film.5 }}</span></p>
+    <p>Asal Negara: <span id="asal-negara">{{ film_tinfo.5 }}</span></p>
     <p>Pemain:</p>
     <ul>
       {% for p in actors %}
@@ -141,9 +141,13 @@
 <div class="container">
   <h2>Ulasan</h2>
 
-  <form method="POST" >
+  <form id="myForm" action="{% url 'tayangan:ulasan' film_tinfo.0 %}" method="POST">
     {% csrf_token %}
-    <p>username: {{ request.COOKIES.username }} </p>
+    <p for="username" type="text" id="username" name="username">username: {{ request.COOKIES.username }} </p>
+    <div class="form-group">
+      <label for="username">username:</label>
+      <input type="text" class="form-control" id="username" name="username" required>
+    </div>
     <div class="form-group">
       <label for="deskripsi">deskripsi:</label>
       <input type="text" class="form-control" id="deskripsi" name="deskripsi" required>
@@ -160,7 +164,7 @@
       </select>
     </div>
     <div>
-      <button type="submit" class="btn btn-dark" >Submit</button> 
+      <button type="submit" class="btn btn-dark">Submit</button>
     </div>
   </form>
 
@@ -196,26 +200,18 @@
 
 <!-- Script JavaScript -->
 <script>
-  // Fungsi untuk mengatur progress bar
-  function setProgressBar() {
-    var progressBar = document.getElementById('progress-bar-fill');
-    var width = 0;
-    var id = setInterval(frame, 10);
-    function frame() {
-      if (width >= 100) {
-        clearInterval(id);
-      } else {
-        width++;
-        progressBar.style.width = width + '%';
-      }
-    }
+  function submitFormAndNavigate() {
+      // Kirim formulir
+      document.getElementById('myForm').submit();
+  
+      // Tunggu sebentar untuk memastikan pengiriman formulir
+      setTimeout(function() {
+          // Arahkan ke URL yang diinginkan
+          window.location.href = "{% url 'tayangan:ulasan' film_tinfo.0 %}";
+      }, 1000);  // Sesuaikan waktu tunggu sesuai kebutuhan
   }
-
-  // Panggil fungsi setProgressBar saat tombol Tonton diklik
-  document.getElementById('btn-tonton').addEventListener('click', function() {
-    setProgressBar();
-  });
-</script>
+  </script>
+  
 
 </body>
 {% endblock content %}

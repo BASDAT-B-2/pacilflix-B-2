@@ -14,6 +14,7 @@ from datetime import datetime, timedelta
 # Create your views here.
 def show_series(request, series_id):
     episodes = []
+    ulasan = []
     with connection.cursor() as cursor:
         cursor.execute(
             f"SELECT judul, sinopsis, asal_negara FROM TAYANGAN WHERE id = '{series_id}'"
@@ -75,6 +76,10 @@ def show_series(request, series_id):
             episodes = cursor.fetchall()
             episodes_with_index = [(i, *episode) for i, episode in enumerate(episodes)]
 
+            cursor.execute(f'SELECT id_tayangan, username, rating, deskripsi FROM ULASAN WHERE id_tayangan = %s', (series_id,))
+            data_ulasan = cursor.fetchall()
+            ulasan = data_ulasan
+
             series_details = {
                 'judul': series_details[0],
                 'sinopsis': series_details[1],
@@ -85,9 +90,10 @@ def show_series(request, series_id):
                 'penulis' : penulis,
                 'id_tayangan' : series_id,
                 'episodes' : episodes_with_index,
+                'ulasan':ulasan
             }
 
-    return render(request, 'HalamanSeries.html', {'series_details': series_details})
+    return render(request, 'HalamanSeries.html', series_details)
 
 
 def show_episode(request, series_id, episode_number):
@@ -129,15 +135,24 @@ def show_film(request,id):
             ulasan = data_ulasan
 
             cursor.execute('SELECT genre FROM GENRE_TAYANGAN WHERE id_tayangan = %s', (id,))
-            genres = cursor.fetchall()
-            cursor.execute('''
-                SELECT p.nama 
-                FROM contributors p 
-                JOIN MEMAINKAN_TAYANGAN m ON p.id = m.id_pemain 
-                JOIN pemain x ON p.id = x.id 
-                WHERE m.id_tayangan = %s
-            ''', (id,))            
-            actors = cursor.fetchall()
+            genre = cursor.fetchall()
+            genres = genre
+
+            cursor.execute(
+                f"SELECT id_pemain FROM MEMAINKAN_TAYANGAN WHERE id_tayangan =  %s", (id,))
+            pemain_ids = cursor.fetchall()
+
+            pemain_names = []
+            for pemain_id in pemain_ids:
+                cursor.execute(
+                    f"SELECT nama FROM CONTRIBUTORS WHERE id = '{pemain_id[0]}'"
+                )
+                pemain_name = cursor.fetchone()
+                if pemain_name:
+                    pemain_names.append(pemain_name[0])
+
+            actors = pemain_names if pemain_names else None
+
             cursor.execute('''
                 SELECT p.nama 
                 FROM contributors p 
@@ -260,7 +275,6 @@ def show_trailer(request):
 
     return render(request, "trailer.html", context)
 
-@csrf_exempt
 def ulasan(request, id):
     if request.method == "POST":
         username = request.POST.get("username")
@@ -271,8 +285,8 @@ def ulasan(request, id):
             with connection.cursor() as cursor:
                 cursor.execute(f"INSERT INTO ULASAN VALUES ('{id}','{username}','{datetime.now()}', '{rating}', '{deskripsi}')")
             
-            return redirect('show_film', id=id)  
+            return HttpResponse()
         except Exception as e:
-            return render(request, "HalamanFilm.html", {'error': str(e)})
+            return HttpResponse("Anda hanya bisa mengirim satu ulasan untuk satu tayangan")
 
     return HttpResponse(status=405)
