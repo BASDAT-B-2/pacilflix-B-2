@@ -6,22 +6,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Subscription</title>
     <style>
-        .bebas-neue-regular {
-            font-family: "Bebas Neue", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-        }
-        body {
-            background-color: #f0f0f0;
-        }
-        * {
-            font-family: sans-serif;
+
+        body{
+            background-color: #fff7f9; /* Set your desired background color here */
+            color: #2e2e2e;
         }
 
         .center-content {
@@ -40,7 +30,7 @@
         }
 
         .content-table thead tr {
-            background-color: #0000aa;
+            background-color: #fab1c2;
             color: #ffffff;
             text-align: left;
             font-weight: bold;
@@ -61,12 +51,7 @@
         }
 
         .content-table tbody tr:last-of-type {
-            border-bottom: 2px solid #0000aa;
-        }
-
-        .content-table tbody tr.active-row {
-            font-weight: bold;
-            color: #0000aa;
+            border-bottom: 2px solid #f8b9c8;
         }
         
         .dropdown {
@@ -144,8 +129,10 @@
         .card-container .btn{
             display: inline-block;
             padding: 8px 50px;
-            background-color: #0000aa;
-            color: #ddd;
+            background-color: #f8b9c8;
+            font-size: 20px;
+            font-style: bold;
+            color: #ffffff;
             border-radius: 4px;
             margin-top: 15px;
             margin-left: 70px;
@@ -154,14 +141,13 @@
     </style>
 </head>
 <body>
-    
-    <h1 class="center-content">Subscription</h1>
+    <h1 class="center-content abril-fatface-regular" style="margin-top: 40px; font-size: 50px;">Subscription</h1>
     <br>
     <div class="center-content">
         {% if active_package %}
-        <h2 style="display: inline-block; " class="bebas-neue-regular">Active Subscription : {{ active_package.3 }}</h2>
+        <h2 style="display: inline-block; " class="playfair-display-yes">Active Subscription : {{ active_package.3 }}</h2>
           
-        <table class="content-table">
+        <table class="content-table montserrat-no">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -203,17 +189,18 @@
             </tbody>
         </table>
         {% else %}
-        <h3 style="display: inline-block;">You don't have any active subscription right now</h3>
+        <h3 class="homemade-apple-regular" style="display: inline-block; margin-top: 70px;">You don't have any active subscription right now
+        </h3>
         {% endif %}
     </div>
     <br>
     <div class="center-content">
-        <h1 style="text-align:center">Choose your plan</h1>
+        <h1 class="abril-fatface-regular" style="text-align:center; margin-top: 40px; font-size: 50px;" >Choose your plan</h1>
         <div class="card-container">
             {% for p in daftar_paket %}
             <div class="card">
-                <div class="card-content">
-                    <h1 class="bebas-neue-regular">{{ p.0 }}</h1>
+                <div class="card-content montserrat-no">
+                    <h1 class="playfair-display-yes" style="font-style: italic;">{{ p.0 }}</h1><br>
                     <p>Resolution : {{ p.2 }}</p> 
                     {% if p.0 == 'gold' %}
                         <p>Watch on Smartphone, Ipad, Laptop, and TV</p>
@@ -223,7 +210,7 @@
                         <p>Watch on Smartphone</p>
                     {% endif %}
                     <p>Rp {{ p.1 }}/month</p>
-                    <a href="{% url 'langganan:pembayaran' p.0 %}" class="btn">Buy</a> <!-- Pass package name to URL -->
+                    <a href="{% url 'langganan:pembayaran' p.0 %}" class="btn playfair-display-yes">Buy</a> <!-- Pass package name to URL -->
                 </div>
             </div>
             {% endfor %}
@@ -231,7 +218,7 @@
     </div>
     
 
-    <h1 class="center-content" style="margin-top: 60px;">Transaction History</h1>
+    <h1 class="abril-fatface-regular" style="text-align:center; margin-top: 40px; font-size: 50px;">Transaction History</h1>
     <br>
     <div class="center-content">
         <table class="content-table">

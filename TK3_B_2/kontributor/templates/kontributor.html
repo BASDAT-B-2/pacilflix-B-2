@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>List of Contributors</title>
     <style>
-        * {
-            font-family: sans-serif;
+
+        body{
+            background-color: #fff7f9; /* Set your desired background color here */
+            color: #2e2e2e;
         }
 
         .center-content {
@@ -24,11 +26,11 @@
             min-width: 1000px;
             border-radius: 5px 5px 0 0;
             overflow: hidden;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 0 20px rgba(218, 182, 182, 0.431);
         }
 
         .content-table thead tr {
-            background-color: #0000aa;
+            background-color: #fab1c2;
             color: #ffffff;
             text-align: left;
             font-weight: bold;
@@ -40,20 +42,15 @@
         }
 
         .content-table tbody tr {
-            border-bottom: 1px solid #dddddd;
+            border-bottom: 1px solid #ffffff;
         }
 
         .content-table tbody tr:nth-of-type(even) {
-            background-color: #f3f3f3;
+            background-color: #ffffff;
         }
 
         .content-table tbody tr:last-of-type {
-            border-bottom: 2px solid #0000aa;
-        }
-
-        .content-table tbody tr.active-row {
-            font-weight: bold;
-            color: #0000aa;
+            border-bottom: 2px solid #fab1c2;
         }
         
         .dropdown {
@@ -103,10 +100,10 @@
 </head>
 <body>
     
-    <h1 class="center-content" style="font-weight: bold;">List of Contributors</h1>
+    <h1 class="center-content abril-fatface-regular" style="margin-top: 40px; font-size: 50px;" style="font-weight: bold;">List of Contributors</h1>
     <br>
     <div class="center-content">
-        <h3 style="display: inline-block;">Filter</h3>
+        <h3 style="display: inline-block;" class="abril-fatface-regular">Filter</h3>
         <div class="dropdown" style="display: inline-block;">
             <select id="filter">
                 <option value="All">View All</option>
