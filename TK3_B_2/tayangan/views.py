@@ -14,6 +14,7 @@ from datetime import datetime, timedelta
 # Create your views here.
 def show_series(request, series_id):
     episodes = []
+    ulasan = []
     with connection.cursor() as cursor:
         cursor.execute(
             f"SELECT judul, sinopsis, asal_negara FROM TAYANGAN WHERE id = '{series_id}'"
@@ -75,6 +76,10 @@ def show_series(request, series_id):
             episodes = cursor.fetchall()
             episodes_with_index = [(i, *episode) for i, episode in enumerate(episodes)]
 
+            cursor.execute(f'SELECT id_tayangan, username, rating, deskripsi FROM ULASAN WHERE id_tayangan = %s', (series_id,))
+            data_ulasan = cursor.fetchall()
+            ulasan = data_ulasan
+
             series_details = {
                 'judul': series_details[0],
                 'sinopsis': series_details[1],
@@ -85,9 +90,10 @@ def show_series(request, series_id):
                 'penulis' : penulis,
                 'id_tayangan' : series_id,
                 'episodes' : episodes_with_index,
+                'ulasan':ulasan
             }
 
-    return render(request, 'HalamanSeries.html', {'series_details': series_details})
+    return render(request, 'HalamanSeries.html', series_details)
 
 
 def show_episode(request, series_id, episode_number):
@@ -279,8 +285,8 @@ def ulasan(request, id):
             with connection.cursor() as cursor:
                 cursor.execute(f"INSERT INTO ULASAN VALUES ('{id}','{username}','{datetime.now()}', '{rating}', '{deskripsi}')")
             
-            return redirect('show_film', id=id)  
+            return HttpResponse()
         except Exception as e:
-            return render(request, "HalamanFilm.html", {'error': str(e)})
+            return HttpResponse("Anda hanya bisa mengirim satu ulasan untuk satu tayangan")
 
     return HttpResponse(status=405)
