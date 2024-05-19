@@ -99,12 +99,16 @@ def show_series(request, series_id):
 def show_episode(request, series_id, episode_number):
     episode_number = int(episode_number)
     with connection.cursor() as cursor:
+        
         cursor.execute(f"SELECT judul FROM TAYANGAN WHERE id = '{series_id}'")
         series_title = cursor.fetchone()
 
+        cursor.execute(f"SELECT id FROM TAYANGAN WHERE id = '{series_id}'")
+        id_seri = cursor.fetchone()
+
         cursor.execute(f"SELECT * FROM EPISODE WHERE id_series = '{series_id}'")
         episodes = cursor.fetchall()
-        episodes_with_index = [(i, *episode) for i, episode in enumerate(episodes)]
+        episodes_with_index = [(i, *episode) for i , episode in enumerate(episodes)]
 
         if 0 <= episode_number < len(episodes):
             episode = episodes[episode_number]
@@ -115,6 +119,7 @@ def show_episode(request, series_id, episode_number):
         'episodes' : episodes_with_index,
         'episode': episode,
         'series_title': series_title[0] if series_title else None,  # Ensure series_title is not None before accessing the title
+        'id_seri' : series_id
     }
     return render(request, 'HalamanEpisode.html', context)
 

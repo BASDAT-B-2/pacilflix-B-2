@@ -67,8 +67,8 @@
 
   <!-- Informasi Episode -->
   <div class="episode-info">
-    <h3>Judul: <span id="judul-episode">{{ episode.judul }}</span></h3>
-    <h3>Sub Judul: <span id="sub-judul-episode">{{ episode.sub_judul }}</span></h3>
+    <h3>Judul: <span id="judul-episode">{{ series_title }}</span></h3>
+    <h3>Sub Judul: <span id="sub-judul-episode">{{ episode.1 }}</span></h3>
     <hr>
          <!-- Progress Bar -->
          <div class="d-flex align-items-start">
@@ -85,17 +85,17 @@
     <h3>Episode Lainnya:</h3>
     <ul>
       {% for ep in episodes %}
-        <li><a href="{{ ep.url }}">{{ ep.nomor }}</a></li>
+        <li><a href="{% url 'tayangan:show_episode' id_seri ep.0 %}">episode {{ ep.0 }}</a></li>
       {% endfor %}
     </ul>
     <h3>Sinopsis Episode:</h3>
-    <p>{{ episode.sinopsis }}</p>
+    <p>{{ episode.2 }}</p>
     <h3>Durasi Episode:</h3>
-    <p>{{ episode.durasi }}</p>
+    <p>{{ episode.3 }}</p>
     <h3>URL Episode:</h3>
-    <p>{{ episode.url }}</p>
+    <p>{{ episode.4 }}</p>
     <h3>Tanggal Rilis Episode:</h3>
-    <p>{{ episode.tanggal_rilis }}</p>
+    <p>{{ episode.5 }}</p>
   </div>
 </div>
 

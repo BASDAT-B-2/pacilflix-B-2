@@ -137,7 +137,7 @@
     <p>Episode:</p>
     <ul>
       {% for episode in series_details.episodes %}
-      <li><a href="/series/{{ series_details.id_tayangan }}/episode/{{ episode.0 }}">Episode {{ episode.0 }}</a></li>
+      <li><a href="{% url 'tayangan:show_episode' series_details.id_tayangan episode.0 %}">Episode {{ episode.0 }}</a></li>
       {% endfor %}
     </ul>    
 
