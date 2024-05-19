@@ -112,7 +112,7 @@
   <div class="container">
     <h2>Ulasan</h2>
   
-    <form id="myForm" action="{% url 'tayangan:ulasan' id_tayangan %}" method="POST">
+    <form id="myForm" action="{% url 'tayangan:ulasan' series_details.id_tayangan %}" method="POST">
       {% csrf_token %}
       <p for="username" type="text" id="username" name="username">username: {{ request.COOKIES.username }} </p>
       <div class="form-group">
@@ -150,7 +150,7 @@
       </thead>
       <tbody>
         <!-- Isi tabel dengan data ulasan -->
-        {% for u in ulasan %}
+        {% for u in series_details.ulasan %}
         <tr>
           <td>{{ u.1 }}</td>
           <td>{{ u.2 }}</td>
@@ -177,7 +177,7 @@
       // Tunggu sebentar untuk memastikan pengiriman formulir
       setTimeout(function() {
           // Arahkan ke URL yang diinginkan
-          window.location.href = "{% url 'tayangan:ulasan' id_tayangan %}";
+          window.location.href = "{% url 'tayangan:ulasan' series_details.id_tayangan %}";
       }, 1000);  // Sesuaikan waktu tunggu sesuai kebutuhan
   }
   </script>

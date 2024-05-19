@@ -93,7 +93,7 @@ def show_series(request, series_id):
                 'ulasan':ulasan
             }
 
-    return render(request, 'HalamanSeries.html', series_details)
+    return render(request, 'HalamanSeries.html', { 'series_details':series_details })
 
 
 def show_episode(request, series_id, episode_number):
