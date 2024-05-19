@@ -137,9 +137,9 @@
     <p>Episode:</p>
     <ul>
       {% for episode in series_details.episodes %}
-      <li><a href="#">{{ episode.episode_title }}</a></li>
+      <li><a href="/series/{{ series_details.id_tayangan }}/episode/{{ episode.0 }}">Episode {{ episode.0 }}</a></li>
       {% endfor %}
-    </ul>
+    </ul>    
 
         <!-- Tombol Unduh -->
     <form action="{% url 'daftar_unduhan:daftar_unduhan' %}" method="post">
@@ -222,8 +222,8 @@
       <thead>
         <tr>
           <th scope="col">Username</th>
-          <th scope="col">Deskripsi</th>
           <th scope="col">Rating</th>
+          <th scope="col">Deskripsi</th>
         </tr>
       </thead>
       <tbody>

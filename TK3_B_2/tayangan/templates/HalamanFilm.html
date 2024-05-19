@@ -123,6 +123,12 @@
       text-transform: none;
       color: var(--white);
     }
+
+    /* Tambahan gaya untuk membuat semua detail film bold */
+    .film-detail {
+      font-weight: bold;
+    }
+
   </style>
 
 </head>
@@ -133,12 +139,12 @@
 
   <!-- Informasi Film -->
   <div class="film-info">
-    <h2>Judul: {{ film_tinfo.1 }}<span id="judul-film"></span></h2>
+    <h2 class="film-detail">Judul: {{ film_tinfo.1 }}<span id="judul-film"></span></h2>
 
      <!-- Progress Bar -->
     <div class="d-flex align-items-start">
       <p></p>
-      <button id="btn-tonton" class="btn btn-triangle mr-3" style="font-size: 40px; color: white;">&#9658;</button>
+      <button id="btn-tonton" class="btn btn-triangle mr-3" style="font-size: 40px; color: black;">&#9658;</button>
       <p></p>
       <div class="progress flex-grow-1">
         <div class="progress-bar bg-secondary" id="progress-bar" role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
@@ -168,33 +174,34 @@
   <p></p>
 </form>
 
-    <p>Total View: <span id="total-view">{{ view_info }}</span></p>
-    <p>Rating Rata-Rata: <span id="rating">-------</span></p>
-    <p>Sinopsis: <span id="sinopsis">{{ film_tinfo.2 }}</span></p>
-    <p>Durasi Film: <span id="durasi">{{ film.3 }} menit</span></p>
-    <p>Tanggal Rilis Film: <span id="tanggal-rilis">{{ film.2 }}</span></p>
-    <p>URL Film: <a href="{{ url_video_film }}" id="url-film">{{ film.1 }}</a></p>
-    <p>Genre:</p>
-    <ul>
-      {% for g in genres %}
-      <li><span id="genre-1">{{ g }}</span></li>
-      {% endfor %}
-      <!-- Lanjutkan dengan item genre lainnya jika diperlukan -->
-    </ul>
-    <p>Asal Negara: <span id="asal-negara">{{ film_tinfo.5 }}</span></p>
-    <p>Pemain:</p>
-    <ul>
+    <p class="film-detail">Total View: <span id="total-view">{{ view_info }}</span></p>
+    <p class="film-detail">Rating Rata-Rata: <span id="rating">-------</span></p>
+    <p class="film-detail">Sinopsis: <span id="sinopsis">{{ film_tinfo.2 }}</span></p>
+    <p class="film-detail">Durasi Film: <span id="durasi">{{ film.3 }} menit</span></p>
+    <p class="film-detail">Tanggal Rilis Film: <span id="tanggal-rilis">{{ film.2 }}</span></p>
+    <p class="film-detail">URL Film: <a href="{{ url_video_film }}" id="url-film">{{ film.1 }}</a></p>
+<p class="film-detail">Genre:</p>
+<ul class="film-detail">
+  {% for g in genres %}
+  <li><span id="genre-1">{{ g|cut:'('|cut:')'|cut:"'"|cut:'"' }}</span></li>
+  {% endfor %}
+  <!-- Lanjutkan dengan item genre lainnya jika diperlukan -->
+</ul>
+
+    <p class="film-detail">Asal Negara: <span id="asal-negara">{{ film_tinfo.5 }}</span></p>
+    <p class="film-detail">Pemain:</p>
+    <ul class="film-detail">
       {% for p in actors %}
         <li><span id="pemain-1"> {{ p }}</span></li>
         {% endfor %}
     </ul>
-    <p>Penulis Skenario:</p>
-    <ul>
+    <p class="film-detail">Penulis Skenario:</p>
+    <ul class="film-detail">
       {% for w in writers %}
-        <li><span id="penulis-skenario-1"> {{ w }} </span></li>
+        <li><span id="penulis-skenario-1">{{ w|cut:'('|cut:')'|cut:"'"|cut:'"' }}</span></li>
       {% endfor %}
     </ul>
-    <p>Sutradara: <span id="sutradara">{{ director }}</span></p>
+    <p class="film-detail">Sutradara: <span id="sutradara">{{ director|cut:'('|cut:')'|cut:"'"|cut:'"' }}</span></p>
   </div>
 
 <!-- Bagian Ulasan -->
@@ -236,8 +243,8 @@
     <thead>
       <tr>
         <th scope="col">Username</th>
-        <th scope="col">Deskripsi</th>
         <th scope="col">Rating</th>
+        <th scope="col">Deskripsi</th>
       </tr>
     </thead>
     <tbody>
