@@ -82,20 +82,29 @@
                 </thead>
                 <tbody>
                     {% for record in records_daftar_favorit %}
-                    <tr class="clickable-row" data-href="{% url 'daftar_favorit:tayangan_favorit' %}?timestamp={{ record.0|date:"Y-m-d H:i:s" }}">
+                    <tr>
                         <td>{{record.2}}</td>
-                        <td>{{record.0|date:"Y-m-d H:i:s"}}</td>
+                        <td>{{record.0}}</td>
                         <td>
-                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-timestamp="{{ record.0|date:"Y-m-d H:i:s" }}">Hapus</button>
+                            <form action="{% url 'daftar_favorit:hapus_daftar' %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="time" value="{{ record.0 }}">
+                                <input type="hidden" name="title" value="{{ record.2 }}">
+                                <p></p>
+                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                <p></p>
+                              </form>
+                            <!-- <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-timestamp="{{ record.0 }}">Hapus</button> -->
                         </td>
                     </tr>
                     {% endfor %}
+
                 </tbody>
             </table>
         </div>
     </div>
     <!-- Modal Konfirmasi Penghapusan -->
-    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -111,32 +120,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var rows = document.querySelectorAll(".clickable-row");
-            rows.forEach(function(row) {
-                row.addEventListener("click", function() {
-                    var url = this.getAttribute("data-href");
-                    if (url) {
-                        window.location.href = url;
-                    }
-                });
-            });
+    </div> -->
 
-            // Mencegah redirection ketika tombol "Hapus" diklik dan menampilkan modal konfirmasi
-            var deleteButtons = document.querySelectorAll(".btn-danger");
-            deleteButtons.forEach(function(button) {
-                button.addEventListener("click", function(event) {
-                    event.stopPropagation(); // Mencegah event klik baris dijalankan
-                    var timestamp = this.getAttribute("data-timestamp");
-                    var confirmDeleteButton = document.getElementById("confirmDeleteButton");
-                    var deleteUrl = "{% url 'daftar_favorit:hapus_daftar' %}?timestamp=" + timestamp;
-                    confirmDeleteButton.setAttribute("href", deleteUrl);
-                });
-            });
-        });
-    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

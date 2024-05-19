@@ -24,17 +24,14 @@ def daftar_unduhan(request):
     response = render(request, 'daftar_unduhan.html', context)
     return response
 
-def hapus_unduhan(request):
-    id_tayangan = request.GET.get('id_tayangan')
+def hapus_unduhan(request, id):
     username = request.COOKIES.get('username')
-    timestamp = request.GET.get('timestamp')
 
     try:
         with connection.cursor() as cursor:
             cursor.execute(
-                f'DELETE FROM TAYANGAN_TERUNDUH WHERE id_tayangan = \'{id_tayangan}\' AND username = \'{username}\' \
-                    AND timestamp = \'{timestamp}\'')
+                f'DELETE FROM TAYANGAN_TERUNDUH WHERE id_tayangan = \'{id}\' AND username = \'{username}\'')
         connection.commit()
-        return JsonResponse({'message': 'Deletion successful.'}, status=200)
+        return redirect('daftar_unduhan:daftar_unduhan')
     except Exception as e:
             return JsonResponse({'message': f'Deletion failed: {str(e)}'}, status=400)
