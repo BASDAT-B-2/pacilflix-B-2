@@ -11,8 +11,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     body {
-      background-color: #471e1e; /* Warna Hitam */
-      color: #ffffff; /* Warna Teks Putih */
+      background-color: #fff7f9; /* Warna background */
+      color: #000000; /* Warna Teks Hitam */
     }
 
     .btn {
@@ -20,12 +20,10 @@
       margin-right: 10px;
     }
 
-    /* Gaya tombol tonton */
     .btn-tonton {
       background-color: #007bff; /* Biru */
       border-color: #007bff; /* Biru */
     }
-
 
     .btn-unduh {
       background-color: #000000;
@@ -34,7 +32,7 @@
     }
 
     .btn-favoritkan {
-      background-color: #ffffff;
+      background-color: #fca7c3;
       border-color: #ffffff;
       color: #000000;
     }
@@ -53,7 +51,81 @@
     .ulasan {
       margin-top: 30px;
     }
+
+    .discover {
+      color: var(--white);
+      font-weight: 400;
+      font-size: 30;
+      border: 0.1rem solid var(--white);
+      border-radius: 10rem;
+      padding: 5px 40px;
+    }
+
+    .content-table {
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 0.9em;
+      min-width: 1000px;
+      border-radius: 5px 5px 0 0;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .content-table thead tr {
+      background-color: #fab1c2;
+      color: #ffffff;
+      text-align: left;
+      font-weight: bold;
+    }
+
+    .content-table th,
+    .content-table td {
+      padding: 12px 15px;
+      text-align: center;
+    }
+
+    .content-table tbody tr {
+      border-bottom: 1px solid #dddddd;
+    }
+
+    .content-table tbody tr:nth-of-type(even) {
+      background-color: #f3f3f3;
+    }
+
+    .content-table tbody tr:last-of-type {
+      border-bottom: 2px solid #f8b9c8;
+    }
+
+    .home {
+      height: 100vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(71, 67, 67, 0.6)),
+      url("https://images.app.goo.gl/FuZ6LGVKpULDn2PJ7");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-flow: column;
+      text-align: center;
+    }
+
+    .home h1 {
+      font-size: 6rem;
+      font-weight: 400;
+      margin-bottom: 3rem;
+      color: var(--white);
+    }
+
+    .home p {
+      font-size: 1.7rem;
+      font-weight: 400;
+      margin-bottom: 3rem;
+      text-transform: none;
+      color: var(--white);
+    }
   </style>
+
 </head>
 <body>
 
@@ -73,14 +145,18 @@
     <form action="{% url 'daftar_unduhan:daftar_unduhan' %}" method="post">
       {% csrf_token %}
       <input type="hidden" name="series_id" value="{{series_details.id_tayangan }}">
+      <p></p>
       <button type="submit" class="btn btn-unduh">Download</button>
+      <p></p>
     </form>
 
      <!-- Formulir untuk tombol favoritkan -->
      <form action="{% url 'daftar_favorit:show_favorit' %}" method="post" style="display: inline;">
       {% csrf_token %}
       <input type="hidden" name="series_id" value="{{ series_details.id_tayangan }}">
+      <p></p>
       <button type="submit" class="btn btn-favoritkan">Favoritkan</button>
+      <p></p>
     </form>
 
     <p>Total View: <span id="total-view">{{ series_details.total_view }}</span></p>
@@ -109,18 +185,17 @@
   </div>
 
   <!-- Bagian Ulasan -->
-  <div class="container">
+<div class="container">
     <h2>Ulasan</h2>
   
     <form id="myForm" action="{% url 'tayangan:ulasan' series_details.id_tayangan %}" method="POST">
       {% csrf_token %}
-      <p for="username" type="text" id="username" name="username">username: {{ request.COOKIES.username }} </p>
       <div class="form-group">
-        <label for="username">username:</label>
-        <input type="text" class="form-control" id="username" name="username" required>
+        <label for="username">Username:</label>
+        <input type="text" class="form-control" id="username" name="username" required value="{{ request.COOKIES.username }}" readonly>
       </div>
       <div class="form-group">
-        <label for="deskripsi">deskripsi:</label>
+        <label for="deskripsi">Deskripsi:</label>
         <input type="text" class="form-control" id="deskripsi" name="deskripsi" required>
       </div>
       <div>
@@ -134,13 +209,16 @@
           <option value=5>5</option>
         </select>
       </div>
+      <p></p>
       <div>
         <button type="submit" class="btn btn-dark">Submit</button>
       </div>
+      <p></p>
+      <p></p>
     </form>
 
     <h3>Daftar Ulasan</h3>
-    <table class="table table-bordered table-custom">
+    <table class="content-table">
       <thead>
         <tr>
           <th scope="col">Username</th>
@@ -149,7 +227,6 @@
         </tr>
       </thead>
       <tbody>
-        <!-- Isi tabel dengan data ulasan -->
         {% for u in series_details.ulasan %}
         <tr>
           <td>{{ u.1 }}</td>
@@ -157,10 +234,8 @@
           <td>{{ u.3 }}</td>          
         </tr>
         {% endfor %}
-      
       </tbody>
     </table>
-
   </div>
 </div>
 
