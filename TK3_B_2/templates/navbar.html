@@ -21,27 +21,34 @@
 
         .navbar-custom .nav-link:hover,
         .navbar-custom .navbar-brand:hover {
-            color: #8a7171; /* Darker shade for hover effect */
+            color: #ffffff; /* Darker shade for hover effect */
         }
 
         .navbar-custom .btn {
             color: white;
         }
 
-        .navbar-custom .btn-secondary {
-            background-color: #555; /* Custom background color for the buttons */
-            border: none;
-        }
-
-        .navbar-custom .btn-dark {
-            background-color: #333; /* Custom background color for the buttons */
-            border: none;
+        .navbar-custom .btn-login {
+            background-color: #e1675c; /* Custom background color for the buttons */
+            color: var(--white);
+            font-weight: 400;
+            font-size: 30;
+            border-radius: 10rem;
+            padding: 5px 40px;
         }
 
         .navbar-custom .btn-secondary:hover,
         .navbar-custom .btn-dark:hover {
             background-color: #444; /* Darker shade for hover effect */
         }
+        .discover {
+            color: var(--white);
+            font-weight: 400;
+            font-size: 30;
+            border: 3px solid #ffffff;
+            border-radius: 10rem;
+            padding: 5px 5px;
+            }
     </style>
 
     <!-- Add Bootstrap CSS -->
@@ -83,10 +90,10 @@
             </ul>
             <div class="navbar-nav ml-auto">
                 {% if request.COOKIES.is_authenticated %}
-                    <a class="btn btn-secondary" type="button" href="{% url 'authentication:logout' %}">Logout</a>
+                    <a class="btn discover" type="button" href="{% url 'authentication:logout' %}">Logout</a>
                 {% else %}
-                    <a class="btn btn-dark mr-2" type="button" href="{% url 'authentication:login' %}">Login</a>
-                    <a class="btn btn-secondary" type="button" href="{% url 'authentication:register' %}">Register</a>
+                    <a class="btn btn-login mr-2 " type="button" href="{% url 'authentication:login' %}">Login</a>
+                    <a class="btn discover" type="button" href="{% url 'authentication:register' %}">Register</a>
                 {% endif %}
             </div>
         </div>
