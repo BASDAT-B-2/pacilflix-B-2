@@ -280,18 +280,51 @@ def show_trailer(request):
 
     return render(request, "trailer.html", context)
 
+@csrf_exempt
 def ulasan(request, id):
     if request.method == "POST":
         username = request.POST.get("username")
         deskripsi = request.POST.get("deskripsi")
         rating = request.POST.get("rating")
+        print(deskripsi)
 
         try :
             with connection.cursor() as cursor:
                 cursor.execute(f"INSERT INTO ULASAN VALUES ('{id}','{username}','{datetime.now()}', '{rating}', '{deskripsi}')")
             
-            return HttpResponse()
+            return redirect('tayangan:show_film', id)
         except Exception as e:
             return HttpResponse("Anda hanya bisa mengirim satu ulasan untuk satu tayangan")
+
+    return HttpResponse(status=405)
+
+@csrf_exempt
+def add_favorit(request, id):
+    if request.method == "POST":
+        username = request.COOKIES.get("username")
+        judul = request.POST.get("film_title")
+
+        try :
+            with connection.cursor() as cursor:
+                cursor.execute(f"INSERT INTO daftar_favorit VALUES ('{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}','{username}', '{judul}')")
+            
+            return redirect('tayangan:show_film', id)
+        except Exception as e:
+            return HttpResponse(e)
+
+    return HttpResponse(status=405)
+
+@csrf_exempt
+def add_download(request, id):
+    if request.method == "POST":
+        username = request.COOKIES.get("username")
+
+        try :
+            with connection.cursor() as cursor:
+                cursor.execute(f"INSERT INTO tayangan_terunduh VALUES ('{id}', '{username}', '{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}')")
+            
+            return redirect('tayangan:show_film', id)
+        except Exception as e:
+            return HttpResponse(e)
 
     return HttpResponse(status=405)

@@ -157,7 +157,7 @@
 
 
 <!-- Tombol Unduh -->
-<form action="{% url 'daftar_unduhan:daftar_unduhan' %}" method="post">
+<form action="{% url 'tayangan:add_download' film_tinfo.0 %}" method="post">
   {% csrf_token %}
   <input type="hidden" name="film_id" value="{{ film.id }}">
   <p></p>
@@ -166,9 +166,10 @@
 </form>
 
 <!-- Tombol Favoritkan -->
-<form action="{% url 'daftar_favorit:show_favorit' %}" method="post">
+<form action="{% url 'tayangan:add_favorit' film_tinfo.0 %}" method="post">
   {% csrf_token %}
   <input type="hidden" name="film_id" value="{{ film.id }}">
+  <input type="hidden" name="film_title" value="{{ film_tinfo.1 }}">
   <p></p>
   <button type="submit" class="btn btn-favoritkan">Favorite</button>
   <p></p>
@@ -272,12 +273,7 @@
   function submitFormAndNavigate() {
       // Kirim formulir
       document.getElementById('myForm').submit();
-  
-      // Tunggu sebentar untuk memastikan pengiriman formulir
-      setTimeout(function() {
-          // Arahkan ke URL yang diinginkan
-          window.location.href = "{% url 'tayangan:ulasan' film_tinfo.0 %}";
-      }, 1000);  // Sesuaikan waktu tunggu sesuai kebutuhan
+      window.location.href = "{% url 'tayangan:show_film' film_tinfo.0 %}";
   }
   </script>
   

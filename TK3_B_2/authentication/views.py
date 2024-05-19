@@ -18,7 +18,7 @@ def register(request):
         try :
             with connection.cursor() as cursor:
                 cursor.execute(f"INSERT INTO PENGGUNA VALUES ('{username}', '{password}', '{country}')")
-            return render(request, "register.html")
+            return render(request, "login.html")
         except Exception as e:
             return render(request, "register.html", {'error':e})
     else:

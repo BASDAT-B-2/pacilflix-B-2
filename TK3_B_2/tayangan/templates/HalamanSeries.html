@@ -141,23 +141,23 @@
       {% endfor %}
     </ul>    
 
-        <!-- Tombol Unduh -->
-    <form action="{% url 'daftar_unduhan:daftar_unduhan' %}" method="post">
-      {% csrf_token %}
-      <input type="hidden" name="series_id" value="{{series_details.id_tayangan }}">
-      <p></p>
-      <button type="submit" class="btn btn-unduh">Download</button>
-      <p></p>
-    </form>
+  <!-- Tombol Unduh -->
+  <form action="{% url 'tayangan:add_download' series_details.id_tayangan %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="film_id" value="{{ series_details.id_tayangan }}">
+    <p></p>
+    <button type="submit" class="btn btn-unduh">Download</button>
+    <p></p>
+  </form>
 
-     <!-- Formulir untuk tombol favoritkan -->
-     <form action="{% url 'daftar_favorit:show_favorit' %}" method="post" style="display: inline;">
-      {% csrf_token %}
-      <input type="hidden" name="series_id" value="{{ series_details.id_tayangan }}">
-      <p></p>
-      <button type="submit" class="btn btn-favoritkan">Favoritkan</button>
-      <p></p>
-    </form>
+  <!-- Tombol Favoritkan -->
+  <form action="{% url 'tayangan:add_favorit' series_details.id_tayangan %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="film_title" value="{{ series_details.judul }}">
+    <p></p>
+    <button type="submit" class="btn btn-favoritkan">Favorite</button>
+    <p></p>
+  </form>
 
     <p>Total View: <span id="total-view">{{ series_details.total_view }}</span></p>
     <p>Rating Rata-Rata: <span id="rating">{{ series_details.rating }}</span></p>

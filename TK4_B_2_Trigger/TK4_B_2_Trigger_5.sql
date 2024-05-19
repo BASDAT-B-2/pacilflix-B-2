@@ -23,3 +23,8 @@ BEGIN
 END;
 $$
 LANGUAGE plpgsql;
+
+CREATE TRIGGER check_active_subscription
+BEFORE INSERT ON TRANSACTION
+FOR EACH ROW
+EXECUTE FUNCTION check_active_subscription();
