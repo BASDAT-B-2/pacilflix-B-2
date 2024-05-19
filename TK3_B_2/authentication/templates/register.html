@@ -10,16 +10,23 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     body {
-      background-color: #471e1e; /* Warna Hitam */
-      color: #ffffff; /* Warna Teks Putih */
+      background-color: #f8b9c8; /* Background color */
+      color: #ffffff; /* Text color */
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      
     }
-
-    .container {
-      max-width: 400px;
-      margin: 100px auto;
-      padding: 20px;
-      border: 1px solid #ffffff; /* Border Putih */
-      border-radius: 5px;
+    .border-container {
+      display: inline-block;
+      background-color: #fbeaee;
+      padding: 50px 50px 50px 50px; /* Padding */
+      text-align: center; /* Center align text */
+      border-radius: 50px;
+      box-shadow:0 3px 8px rgba(0, 0, 0, 0.288);
+      margin-top: 10vh;
+      margin-left: 70vh;
     }
 
     .form-group {
@@ -27,24 +34,26 @@
     }
 
     .form-control {
-      border-color: #ffffff; /* Border Putih */
+      border-color: #ffffff;
+      border-radius: 30px;
     }
 
     .btn {
       width: 100%;
+      border-radius: 30px;
     }
   </style>
 </head>
 <body>
 
-<div class="container">
+<div class="border-container">
   {% if error %}
   <div class="alert alert-danger">{{ error }}</div>
   {% endif %}
-  <h2 class="text-center mb-4">Register - PacilFlix</h2>
-  <form method="POST" action="{% url 'authentication:register' %}">
+  <h2 class="abril-fatface-regular" style="font-size: 40px; color:#f89ab0; margin-bottom: 10px;">Register - PacilFlix</h2>
+  <form method="POST" action="{% url 'authentication:register' %}" style="font-size: 16px; color:#343334; ">
     {% csrf_token %}
-    <div class="form-group">
+    <div class="form-group" >
       <label for="username">Username:</label>
       <input type="text" class="form-control" id="username" name="username" required>
     </div>
@@ -53,9 +62,9 @@
       <input type="password" class="form-control" id="password" name="password" required>
     </div>
     <div class="form-group">
-      <label for="country">Negara Asal:</label>
+      <label for="country">Country:</label>
       <select class="form-control" id="country" name="country" required>
-        <option value="">Pilih Negara</option>
+        <option value="">Choose One</option>
         <option value="Indonesia">Indonesia</option>
         <option value="Malaysia">Malaysia</option>
         <option value="Singapore">Singapore</option>

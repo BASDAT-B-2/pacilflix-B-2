@@ -11,9 +11,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     body {
-      background-image: url('https://i.pinimg.com/564x/c1/56/3c/c1563cc3942d5081b510179102629916.jpg');
-      background-size: cover;
-      color: #ffffff;
+      background-color: #471e1e; /* Warna Hitam */
+      color: #ffffff; /* Warna Teks Putih */
     }
 
     .btn {
@@ -57,7 +56,17 @@
     <h3>Judul: <span id="judul-episode">{{ episode.judul }}</span></h3>
     <h3>Sub Judul: <span id="sub-judul-episode">{{ episode.sub_judul }}</span></h3>
     <hr>
-    <button class="btn btn-tonton">Tonton</button>
+         <!-- Progress Bar -->
+         <div class="d-flex align-items-start">
+          <button id="btn-tonton" class="btn btn-triangle mr-3" style="font-size: 40px; color: white;">&#9658;</button>
+          <div class="progress flex-grow-1">
+            <div class="progress-bar bg-secondary" id="progress-bar" role="progressbar" style="width: 10%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar bg-primary" id="progress-bar-fill" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>      
+        
+        <!-- Tombol Tonton -->
+        <a href="{{ url_video_film }}" class="btn btn-tonton" target="_blank">Tonton</a>
     <hr>
     <h3>Episode Lainnya:</h3>
     <ul>
@@ -80,6 +89,29 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Script JavaScript -->
+<script>
+  // Fungsi untuk mengatur progress bar
+  function setProgressBar() {
+    var progressBar = document.getElementById('progress-bar-fill');
+    var width = 0;
+    var id = setInterval(frame, 10);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+      } else {
+        width++;
+        progressBar.style.width = width + '%';
+      }
+    }
+  }
+
+  // Panggil fungsi setProgressBar saat tombol Tonton diklik
+  document.getElementById('btn-tonton').addEventListener('click', function() {
+    setProgressBar();
+  });
+</script>
 
 </body>
 {% endblock content %}

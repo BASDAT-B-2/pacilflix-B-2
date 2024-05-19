@@ -1,49 +1,100 @@
-<!-- Navbar Pengguna (Login) -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">PacilFlix</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mr-auto">
-        {% if request.COOKIES.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'tayangan:show_tayangan' %}">Daftar Tayangan</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'kontributor:show_kontributor' %}">Daftar Kontributor</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'favorit:show_favorit' %}">Kelola Daftar Favorit</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'unduhan:show_unduhan' %}">Kelola Daftar Unduhan</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'langganan:show_langganan' %}">Kelola Langganan</a>
-          </li>
-        {% else %}
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Beranda <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'tayangan:show_trailer' %}">Trailer</a>
-          </li>
-        {% endif %}
-      </ul>
-      <div class="navbar-nav ml-auto">
-        {% if request.COOKIES.is_authenticated %}
-          <a class="btn btn-light" type="button" href="{% url 'authentication:logout' %}">Logout</a>
-        {% else %}
-          <a class="btn btn-dark mr-2" type="button" href="{% url 'authentication:login' %}">Login</a>
-          <a class="btn btn-secondary" type="button" href="{% url 'authentication:register' %}">Register</a>
-        {% endif %}
-      </div>
-    </div>
-  </nav>
-  
-  <!-- Add Bootstrap CSS and JS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PacilFlix</title>
+    <style>
+        /* Ensure all text in the navbar is black */
+        .navbar-custom {
+            background-color: #f8b9c8;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
+
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link,
+        .navbar-custom .btn {
+            color: black;
+        }
+
+        .navbar-custom .nav-link:hover,
+        .navbar-custom .navbar-brand:hover {
+            color: #8a7171; /* Darker shade for hover effect */
+        }
+
+        .navbar-custom .btn {
+            color: white;
+        }
+
+        .navbar-custom .btn-secondary {
+            background-color: #555; /* Custom background color for the buttons */
+            border: none;
+        }
+
+        .navbar-custom .btn-dark {
+            background-color: #333; /* Custom background color for the buttons */
+            border: none;
+        }
+
+        .navbar-custom .btn-secondary:hover,
+        .navbar-custom .btn-dark:hover {
+            background-color: #444; /* Darker shade for hover effect */
+        }
+    </style>
+
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Navbar Pengguna (Login) -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <a class="navbar-brand abril-fatface-regular" style="font-size: 30px;" href="#">PacilFlix</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse montserrat-no" id="navbarNav">
+            <ul class="navbar-nav mr-auto" style="font-size: 17px;">
+                {% if request.COOKIES.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'tayangan:show_tayangan' %}">Watching List</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'kontributor:show_kontributor' %}">Contributors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'daftar_favorit:show_favorit' %}">My Favorite</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'daftar_unduhan:daftar_unduhan' %}">Downloads</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'langganan:show_langganan' %}">Subscription</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'tayangan:show_trailer' %}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'tayangan:show_trailer' %}">Watch Trailer</a>
+                    </li>
+                {% endif %}
+            </ul>
+            <div class="navbar-nav ml-auto">
+                {% if request.COOKIES.is_authenticated %}
+                    <a class="btn btn-secondary" type="button" href="{% url 'authentication:logout' %}">Logout</a>
+                {% else %}
+                    <a class="btn btn-dark mr-2" type="button" href="{% url 'authentication:login' %}">Login</a>
+                    <a class="btn btn-secondary" type="button" href="{% url 'authentication:register' %}">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Add Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

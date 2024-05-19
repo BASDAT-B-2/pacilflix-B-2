@@ -11,76 +11,52 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <style>
     body {
-      background-color: #471e1e; /* Warna Hitam */
-      color: #ffffff; /* Warna Teks Putih */
+      background-color: #fff7f9; /* Warna Hitam */
+      color: #191818; /* Warna Teks Putih */
+    }
+    .discover {
+      color: var(--white);
+      font-weight: 400;
+      font-size: 30;
+      border: 0.1rem solid var(--white);
+      border-radius: 10rem;
+      padding: 5px 40px;
     }
 
-    .btn, th, td {
-      color: #ffffff; /* Warna Tulisan Putih */
-    }
-    .dropdown .dropbtn {
-        font-size: 16px;  
-        border: none;
-        outline: none;
-        color: rgb(254, 254, 254);
-        padding: 14px 16px;
-        background-color: inherit;
-        font-family: inherit;
-        margin: 0;
-    }
+    .content-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            min-width: 1000px;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
 
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #f9f9f9;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-    }
+        .content-table thead tr {
+            background-color: #fab1c2;
+            color: #ffffff;
+            text-align: left;
+            font-weight: bold;
+        }
 
-    .dropdown-content a {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-        text-align: left;
-    }
+        .content-table th,
+        .content-table td {
+            padding: 12px 15px;
+            text-align: center;
+        }
 
-    .dropdown-content a:hover {
-        background-color: #ddd;
-    }
+        .content-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
 
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
+        .content-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
 
-
-    /* Gaya tambahan untuk tabel */
-    .table-custom {
-      border-radius: 10px; /* Aksen lengkungan */
-      overflow: hidden; /* Menghilangkan sisi lengkungan yang terpotong */
-      background-color: #4e4e4e; /* Warna latar belakang */
-    }
-
-    /* Gaya tambahan untuk header tabel */
-    .table-custom thead {
-      background-color: #2c2c2c; /* Warna latar belakang header */
-    }
-
-    /* Gaya tambahan untuk teks di header tabel */
-    .table-custom th {
-      border: none; /* Hapus border di header */
-    }
-
-    /* Gaya tambahan untuk baris tabel */
-    .table-custom tbody tr {
-      background-color: #363636; /* Warna latar belakang baris */
-    }
-
-    /* Gaya tambahan untuk tombol pada tabel */
-    .table-custom .btn {
-      border-radius: 10px; /* Aksen lengkungan pada tombol */
-    }
+        .content-table tbody tr:last-of-type {
+            border-bottom: 2px solid #f8b9c8;
+        }
   </style>
 </head>
 <body>
@@ -89,22 +65,19 @@
 <div class="container mt-4">
       <!-- Input Pencarian Tayangan -->
   <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Cari Berdasarkan Judul..." aria-describedby="searchButton">
+    <input type="text" class="form-control" placeholder="Search" aria-describedby="searchButton">
     <div class="input-group-append">
       <button class="btn btn-outline-secondary" type="button" id="searchButton">Search</button>
     </div>
   </div>
 
 
-  <h1 class="mb-4" style="display: inline-block;">Top 10 Shows This Week</h1>
+  <h1 style="display: inline-block; color: #262626;" class="playfair-display-yes">Top 10 This Week</h1><br>
   <div class="dropdown" style="display: inline-block;">
-    <button class="dropbtn">Show All 
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="#">Global</a>
-      <a href="#">Your Country</a>
-    </div>
+    <select id="payment-method">
+        <option value="global">Globally</option>
+        <option value="local">Your Country</option>
+    </select>
   </div>
 
 
@@ -112,7 +85,7 @@
   <!-- Opsi Top 10 Tayangan Terbaik -->
 
   <!-- Tabel untuk Menampilkan Tayangan -->
-  <table class="table table-bordered table-custom">
+  <table class="content-table">
     <thead>
       <tr>
         <th scope="col">Rank</th>
@@ -132,8 +105,7 @@
         <td><a href="{{ ten.3 }}">{{ ten.3 }}</a></td>
         <td>{{ ten.4 }}</td>
         <td>{{ ten.5 }}</td>
-        
-        
+
       </tr>
       {% endfor %}
     </tbody>
@@ -142,10 +114,10 @@
 
 <!-- Isi Halaman Web -->
 <div class="container mt-4">
-  <h1 class="mb-4">Movie</h1>
+  <h1 style="display: inline-block; color: #262626;" class="playfair-display-yes">Film</h1><br>
 
 <!-- Tabel untuk Menampilkan Tayangan -->
-<table class="table table-bordered table-custom">
+<table class="content-table">
   <thead>
     <tr>
       <th scope="col" style="width: 20%;">Title</th>
@@ -169,10 +141,10 @@
 
 <!-- Isi Halaman Web -->
 <div class="container mt-4">
-  <h1 class="mb-4">Series</h1>
+  <h1 style="display: inline-block; color: #262626;" class="playfair-display-yes">Series</h1><br>
 
 <!-- Tabel untuk Menampilkan Tayangan -->
-<table class="table table-bordered table-custom">
+<table class="content-table">
   <thead>
     <tr>
       <th scope="col" style="width: 20%;">Title</th>
