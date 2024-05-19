@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.db import connection
 from django.http import JsonResponse
 from datetime import datetime
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def daftar_unduhan(request):
@@ -24,6 +25,7 @@ def daftar_unduhan(request):
     response = render(request, 'daftar_unduhan.html', context)
     return response
 
+@csrf_exempt
 def hapus_unduhan(request, id):
     username = request.COOKIES.get('username')
 
